@@ -14,7 +14,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
 
-collections_dir: .
+collections_dir: ./
 collections:
   posts:
     output: true
