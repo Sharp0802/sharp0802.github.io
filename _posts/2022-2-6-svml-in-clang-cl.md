@@ -2,7 +2,7 @@
 layout: post
 title: "Clang-cl에서 SVML 사용하기"
 date: 2022-2-6
-categories: [ "C++" "SIMD" ]
+categories: [ "C++", "SIMD" ]
 ---
 
 ## 문제
