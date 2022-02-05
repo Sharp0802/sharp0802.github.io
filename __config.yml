@@ -1,0 +1,28 @@
+title: Sharp0802's Dev Blog
+markdown: kramdown
+url: "https://sharp0802.github.io"
+baseurl: "/jekyll-theme-serial-programmer"
+
+# for atom feed
+author:
+  name: Sharp0802
+  email: sharp0802.business@gmail.com
+
+plugins:
+  - jemoji
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+collections_dir: .
+collections:
+  posts:
+    output: true
+
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      layout: "post"
+      permalink: /posts/:title/
+exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]
