@@ -28,7 +28,7 @@ net4.x부터 CLR에 의해 예약된 메모리 외부에서 오류가 발생하�
 
 간단히, HandleProcessCorruptedStateExceptionsAttribute를 메서드에 추가하도록 하자
 
-```C#
+```Csharp
 // AccessViolationException을 throw하는 함수
 [method: DllExport("xxx.dll")]
 private static extern void ThrowAccessViolationException();
