@@ -2,7 +2,7 @@
 layout: post
 title: "System.AccessViolationException"
 date: 2022-2-6
-categories: [ "C#", ".Net", "SIMD" ]
+categories: [ "C#", ".Net" ]
 ---
 
 ## 문제
