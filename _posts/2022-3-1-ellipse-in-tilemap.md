@@ -55,7 +55,7 @@ public static Vector2 GetYOnEllipseByX(float x, float w, float h)
     var a = MathF.Max(w, h);
     var b = MathF.Min(w, h);
 
-    var y = b * MathF.Sqrt((a * a - x * x) / a * a);
+    var y = b * MathF.Sqrt((a * a - x * x) / (a * a));
 
     return new Vector2(y, -y);
 }
@@ -73,7 +73,7 @@ public static Vector2Int GetYOnEllipseByX(int x, float w, float h)
     var a = Mathf.Max(w, h);
     var b = Mathf.Min(w, h);
 
-    var y = Mathf.RoundToInt(b * Mathf.Sqrt((a * a - x * x) / a * a));
+    var y = Mathf.RoundToInt(b * Mathf.Sqrt((a * a - x * x) / (a * a)));
 
     return new Vector2Int(y, -y);
 }
@@ -95,7 +95,7 @@ public static Vector2Int GetYOnEllipseByXWithOffset(Vector2Int offset, int x, fl
     var a = Mathf.Max(w, h);
     var b = Mathf.Min(w, h);
 
-    var y = Mathf.RoundToInt(b * Mathf.Sqrt((a * a - x * x) / a * a));
+    var y = Mathf.RoundToInt(b * Mathf.Sqrt((a * a - x * x) / (a * a)));
 
     return new Vector2Int(y, -y) + Vector2Int.one * offset.y;
 }
