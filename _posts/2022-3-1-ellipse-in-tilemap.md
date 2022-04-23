@@ -32,10 +32,14 @@ $(X_{c}, Y_{c}) = (0, 0)$이고, 각도 t에서 양의 x값을 $x_{p}$라고 가
 
 이를 Y(t)에 대입하여 x값에 따른 y값을 반환하는 f(x)를 구하면 다음과 같다.
 $$
+\begin{equation}
+\begin{split}
 \forall x_{p} \in \{t | t \in \mathbb{Q}, t \geq 0\}, f(x_{p}) &= Y(\arccos{\frac{x_{p}}{a}}) \\
                                                                &= b (arccos \circ sin)(\frac{x_{p}}{a}) \\
                                 \forall x \in \mathbb{Q}, f(x) &= \pm b (arccos \circ sin)(\frac{x}{a}) \\
                                                                &= \pm b \sqrt{\frac{a^2 - x^2}{a^2}}
+\end{split}
+\end{equation}
 $$
 
 ### 구현
