@@ -9,8 +9,8 @@ categories: [ "C#", "Math" ]
 
 위키피디아에 따르면, 각도 t에서 타원 위의 점 $(X(t), Y(t))$는 다음과 같다.
 $$
-X(t) = X_{c} + a * cos(t) * cos(\phi) - b * sin(t) * sin(\phi)
-Y(t) = Y_{c} + a * cos(t) * sin(\phi) - b * sin(t) * cos(\phi)
+X(t) &= X_{c} + a \times \cos{t} \times \cos{\phi} - b \times \sin{t} \times \sin{\phi} \\
+Y(t) &= Y_{c} + a \times \cos{t} \times \sin{\phi} - b \times \sin{t} \times \cos{\phi}
 $$
 $(X_{c}, Y_{c})$는 타원의 중점, a는 장축의 절반, b는 단축의 절반의 길이값이다.
 
@@ -18,8 +18,8 @@ $\phi$는 x축을 기준으로 타원이 y축 방향으로 기울어진 방향�
 
 필요한건, 기울어진 타원이 아니므로, 아래의 방정식으로 간단히 만든다.
 $$
-X(t) = X_{c} + a * cos(t)
-Y(t) = Y_{c} + b * sin(t)
+X(t) &= X_{c} + a \cos{t} \\
+Y(t) &= Y_{c} + b \sin{t}
 $$
 
 ### x에 따른 타원 위의 점
@@ -28,21 +28,15 @@ $$
 
 $(X_{c}, Y_{c}) = (0, 0)$이고, 각도 t에서 양의 x값을 $x_{p}$라고 가정하자.
 
-이때, $x_{p} = a * cos(t)$이다.
+이때, $x_{p} = a \cos{t} ∴ t = \arccos{\frac{x_{p}}{a}}$다.
 
-xp와 a가 상수이므로, $x_{p} / a = cos(t)$다.
-
-결과적으로, $acos(\cfrac{x_{p}}{a}) = t$다.
-
-이를 Y(t)에 대입하면, $b * sin(acos(\cfrac{x_{p}}{a}))$다.
-
-일반화 시키면, $y = b * sin(acos(\cfrac{x}{a}))$다.
-
-$sin(acos(\cfrac{x}{a})) = sqrt(\cfrac{a^2 - x^2}{a^2})$이므로,
-
-$y = b * sqrt(\cfrac{a^2 - x^2}{a^2})$와 같이 간단히 한다.
-
-양수만 반환하므로, $\pm$를 붙여, $y = \pm b * \sqrt{\cfrac{a^2 - x^2}{a^2}}$로 쓴다.
+이를 Y(t)에 대입하여 x값에 따른 y값을 반환하는 f(x)를 구하면 다음과 같다.
+$$
+\forall x_{p} \in \{t | t \in \mathbb{Q}, t \geq 0\}, f(x_{p}) &= Y(\arccos{\frac{x_{p}}{a}}) \\
+                                                               &= b (arccos \circ sin)(\frac{x_{p}}{a}) \\
+                                \forall x \in \mathbb{Q}, f(x) &= \pm b (arccos \circ sin)(\frac{x}{a}) \\
+                                                               &= \pm b \sqrt{\frac{a^2 - x^2}{a^2}}
+$$
 
 ### 구현
 
