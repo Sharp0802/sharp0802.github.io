@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "--nostdlib과 --nostartfiles에 대하여"
-date: 2023-2-23
+date: 2023-02-23
 categories: ["C/C++", "Optimization"]
 ---
 
@@ -35,7 +35,7 @@ categories: ["C/C++", "Optimization"]
 따라서 단순히 `-nostdlib` 플래그만 적용시키고 프로젝트를 컴파일하면,
 수많은 오류를 뿜어낼 것이다.
 
-#### _"Undefined symbol: `___chkstk_ms`"_ 에 대하여
+#### \_"Undefined symbol: `___chkstk_ms`"\_ 에 대하여
 
 > <picture> 
 > <img alt="Warning" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/tip.svg">
@@ -59,7 +59,7 @@ gcc나 clang은 stack-overflow를 방어하기위해 함수 호출시에 같이 
 `-fno-stack-check` 플래그로 아예 스택 보호를 없애버릴 수도 있다.
 
 가끔 링크 오류나는 김에 `___chkstk_ms`를 아래와 같이 정의해버리는 경우가 있는데,
-당연히 작동 안하고, 문서화도 안돼있는지라, 
+당연히 작동 안하고, 문서화도 안돼있는지라,
 MinGW 레포지토리에서 소스 긁어와서 실험적으로 사용할게 아니라면,
 순순히 `-lgcc`나 `-fno-stack-check`를 쓰는 편이 편하다.
 

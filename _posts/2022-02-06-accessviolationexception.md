@@ -1,7 +1,7 @@
 ﻿---
 layout: post
 title: "System.AccessViolationException"
-date: 2022-2-6
+date: 2022-02-06
 categories: [ "C#", ".Net" ]
 ---
 

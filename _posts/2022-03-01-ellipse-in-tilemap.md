@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tilemap에서 C#을 이용해 타원그리기"
-date: 2022-3-1
+date: 2022-03-01
 categories: [ "C#", "Math" ]
 ---
 
