@@ -1,8 +1,11 @@
 ﻿---
-layout: post
-title: "Clang-cl에서 SVML 사용하기"
-date: 2022-02-06
-categories: [ "C++", "SIMD" ]
+LCID: ko-kr
+Layout: default
+Title: Clang-cl에서 SVML 사용하기
+Timestamps:
+- 2022-02-06
+- 2023-05-01
+Topic: [ "C", "C++", "SIMD", "clang-cl", "clang" ]
 ---
 
 ## 문제

@@ -1,0 +1,19 @@
+{
+  "Info": {
+    "Name": "sharp0802-github-io",
+    "ApiVersion": "1.0.0.0",
+    "PostDirectory": "post/",
+    "LayoutDirectory": "layout/",
+    "SiteDirectory": "site/",
+    "BuildDirectory": "build/"
+  },
+  "Profile": {
+    "UserName": "Sharp0802",
+    "ProfileImage": "thumbnail-here"
+  },
+  "Contacts": {
+    "GitHub": "www.github.com/Sharp0802",
+    "Email": "sharp0802.business@gmail.com",
+    "Misc": []
+  }
+}

@@ -1,8 +1,11 @@
 ---
-layout: post
-title: "Tilemap에서 C#을 이용해 타원그리기"
-date: 2022-03-01
-categories: [ "C#", "Math" ]
+LCID: ko-kr
+Layout: default
+Title: Unity Tilemap에서 C#을 이용해 타원그리기
+Timestamps:
+- 2022-03-01
+- 2023-05-01
+Topic: [ "C#", ".Net", "Unity", "Math" ]
 ---
 
 ### 각도 t에 따른 타원 위의 점

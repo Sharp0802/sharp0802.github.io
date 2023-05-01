@@ -1,8 +1,11 @@
-﻿---
-layout: post
-title: "System.AccessViolationException"
-date: 2022-02-06
-categories: [ "C#", ".Net" ]
+---
+LCID: ko-kr
+Layout: default
+Title: accessviolationexception
+Timestamps:
+- 2022-02-06
+- 2023-05-01
+Topic: [ "C#", ".Net", "AccessViolationException" ]
 ---
 
 ## 문제
