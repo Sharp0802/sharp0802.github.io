@@ -16,8 +16,8 @@ Topic: []
 
 ### 📫 연락처
 
-- Email: sharp0802.business@gmail.com
-- Academic Email: syw0802.dev@dimigo.hs.kr
+- Email: [sharp0802.business@gmail.com](mailto:sharp0802.business@gmail.com)
+- Academic Email: [syw0802.dev@dimigo.hs.kr](mailto:syw0802.dev@dimigo.hs.kr)
 - Blog: [sharp0802.github.io](https://sharp0802.github.io)
 
 ### 🔭 Github Stats

@@ -3,7 +3,7 @@ LCID: ko-kr
 Layout: default
 Title: --nostdlib과 --nostartfiles에 대하여
 Timestamps:
-- 2022-02-23
+- 2023-02-23
 - 2023-05-01
 Topic: [ "C", "C++", "Optimization", "Depolyment", "Size" ]
 ---

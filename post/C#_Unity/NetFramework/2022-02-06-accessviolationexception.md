@@ -1,11 +1,12 @@
 ---
 LCID: ko-kr
 Layout: default
-Title: accessviolationexception
+Title: Handling AccessViolationException
 Timestamps:
 - 2022-02-06
 - 2023-05-01
-Topic: [ "C#", ".Net", "AccessViolationException" ]
+- 2023-05-03
+Topic: [ "C#", ".Net", "AccessViolationException", "SEH" ]
 ---
 
 ## 문제
