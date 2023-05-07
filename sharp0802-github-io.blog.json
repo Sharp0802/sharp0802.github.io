@@ -4,7 +4,7 @@
     "ApiVersion": "1.0.0.0",
     "PostDirectory": "post/",
     "LayoutDirectory": "layout/",
-    "SiteDirectory": "site/",
+    "SiteDirectory": "docs/",
     "BuildDirectory": "build/"
   },
   "Profile": {
