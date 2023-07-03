@@ -2,6 +2,7 @@
   "Info": {
     "Name": "sharp0802-github-io",
     "ApiVersion": "1.0.0.0",
+    "RootUri": "https://sharp0802.github.io/",
     "PostDirectory": "post/",
     "LayoutDirectory": "layout/",
     "SiteDirectory": "docs/",

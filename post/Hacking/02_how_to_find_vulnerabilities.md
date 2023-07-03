@@ -9,7 +9,7 @@ Topic: [ "Hacking" ]
 
 # Code Auditing
 
-- 소스코드를 직접 눈으로 보고 정적으로 취약점을 찾는 것    
+- 소스코드를 직접 눈으로 보고 정적으로 취약점을 찾는 것
 - Twice the Bits, Twice the Trouble: Vulnerabilities Induced by Migrating to 64-bit platforms
     - https://intellisec.de/pubs/2016-ccs.pdf
     - 32bit 플랫폼에서 잘 돌아가는 코드가 64bit플랫폼에서 취약해지는 것에 대한 연구

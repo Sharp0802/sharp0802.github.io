@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="Hacking"/>
+    <title>05: 버그 헌팅</title>
+    <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
+    <link rel="defer" href="style/gfm-dark.css"/>
+    <link rel="defer" href="style/post.css"/>
+    <link rel="defer" href="style/hl-github-dark.min.css"/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' defer></script>
+    <script src="script/highlight.min.js" defer></script>
+    <script src="script/defer-css.js" defer></script>
+    <script src="script/treeview.js" defer></script>
+    <script src="script/search.js" defer></script>
+</head>
+
+<body>
+
+<nav class="sidenav">
+    <!-- PROFILE -->
+    <section id="profile">
+        <img alt="" id="profile-img" src="https://avatars.githubusercontent.com/u/64760536?v=4"/>
+        <h3>Sharp0802</h3>
+        <ul id="contacts">
+                <li class="github-logo"><a href="https://www.github.com/Sharp0802">GitHub Account</a></li>
+                <li class="email-logo"><a href="mailto:sharp0802.business@gmail.com">Email</a></li>
+        </ul>
+    </section>
+
+    <br/>
+
+    <!-- SEARCH FORM -->
+    <form role="search" id="search-form">
+        <svg viewBox="0 0 1024 1024">
+            <path d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"/>
+        </svg>
+        <input id="search-box" type="text" placeholder="Search"/>
+    </form>
+
+    <!-- TREE VIEW -->
+    <ul id="tree-view">
+        <li>
+  <span class="caret">Hacking</span>
+  <ul class="nested">
+    <li>
+      <a href="0E176A04F68989C503016330ADBB2A63960E3533.html">03: 디지털 포렌식?</a>
+    </li>
+    <li>
+      <a href="1922A23EF12E83BB87E7AE758B99C6D0F9ED646F.html">01: 해커다운 생각</a>
+    </li>
+    <li>
+      <a href="DBD1D988A45A14C1C92AE07AE1E220D6EA343E86.html">02: 어떻게 취약점을 찾는가: 과제</a>
+    </li>
+    <li>
+      <a href="C539BC10A82E478AD7CF8C117CBC93FF9C55EE10.html">02: 어떻게 취약점을 찾는가</a>
+    </li>
+    <li>
+      <a href="D48BB906026A25AB4C45E7AAB3D343DE94DABB04.html">04: 모바일 악성코드 분석</a>
+    </li>
+    <li>
+      <a href="6F5ED1341DA402A5A7F7750B9FE2CD75698A2560.html">05: 버그 헌팅</a>
+    </li>
+    <li>
+      <a href="42D488CB8259657BA9F7538D161112570B760322.html">00: 해커와 해킹</a>
+    </li>
+  </ul>
+</li><li>
+  <a href="index.html">Welcome!</a>
+</li><li>
+  <span class="caret">C#_Unity</span>
+  <ul class="nested">
+    <li>
+      <span class="caret">NetFramework</span>
+      <ul class="nested">
+        <li>
+          <a href="4F554546444336B80F8E4DEC327670A9469C085B.html">Handling AccessViolationException</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span class="caret">Unity</span>
+      <ul class="nested">
+        <li>
+          <a href="3049198C662190E2902BAEB7B33F5529A52B665E.html">Unity Tilemap에서 C#을 이용해 타원그리기</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li><li>
+  <span class="caret">C_C++</span>
+  <ul class="nested">
+    <li>
+      <a href="029820CC2425202CCC570682BB8048771CF21005.html">--nostdlib과 --nostartfiles에 대하여</a>
+    </li>
+    <li>
+      <a href="0DEE01B5E20E351AA8C3B7E4BDAE7227F5471FF8.html">Clang-cl에서 SVML 사용하기</a>
+    </li>
+  </ul>
+</li>
+    </ul>
+</nav>
+
+<header id="article-header">
+    <h1>05: 버그 헌팅</h1>
+    <ul id="date-log">
+                    <li>Created 2023-07-03</li>
+    </ul>
+</header>
+
+<main id="article-main" class="markdown-body">
+    <h1 id="section"><a id="pragma-line-2"></a>버그 리포팅 3대 요소</h1>
+<ol id="pragma-line-4">
+<li id="pragma-line-4">기도하기 : 패치 안되게 해주세요</li>
+<li id="pragma-line-5">공부하기 : 모든 걸 뚫을 수 있도록</li>
+<li id="pragma-line-6">AAR/AAW : AAR/AAW까지 포기하지 말자</li>
+</ol>
+<p id="pragma-line-8">High Rewards &amp; High Confidence</p>
+<h1 id="section-1"><a id="pragma-line-10"></a>어떻게 버그 헌터가 될수 있을까</h1>
+<h2 id="section-2"><a id="pragma-line-12"></a>잔소리</h2>
+<ol id="pragma-line-14">
+<li id="pragma-line-14">English * * * * *
+<ul id="pragma-line-15">
+<li id="pragma-line-15">저명한 연구가나 떠오르는 샛별 모두 영어를 쓴다
+<ul id="pragma-line-16">
+<li id="pragma-line-16">기술적인 트윗과 의견도 모두 영어로 쓴다</li>
+<li id="pragma-line-17">제1언어가 영어가 아니어도 영어로 쓴다</li>
+</ul>
+</li>
+<li id="pragma-line-18">유명한 컴퍼런스들은 모두 영어를 쓴다</li>
+<li id="pragma-line-19">중국인들도 영어를 쓴다
+<ul id="pragma-line-20">
+<li id="pragma-line-20">트윗할때도, 토론할때도 모두 영어를 쓴다</li>
+</ul>
+</li>
+<li id="pragma-line-21">거의 모든 보안 보고서는 영어로 쓰여야 한다
+<ul id="pragma-line-22">
+<li id="pragma-line-22">Google, Microsoft, Apple, ZDI, even if Samsung</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-23">Computer Science * *
+<ul id="pragma-line-24">
+<li id="pragma-line-24">모든 해킹 기법은 Computer Science에 기반한다
+<ul id="pragma-line-25">
+<li id="pragma-line-25">Operating System, Algorithm, Network</li>
+<li id="pragma-line-26">하지만, 너무 열심히 하지 마라
+<ul id="pragma-line-27">
+<li id="pragma-line-27">대학원 잡혀감&hellip;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-28">프로그래밍, Design pattern, DevOps
+<ul id="pragma-line-29">
+<li id="pragma-line-29">이거 써봤으면, 몇몇 이슈는 매우 쉽고 빠르게 찾을 수 있다</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-30">Read the Code / Assembly * * * * *
+<ul id="pragma-line-31">
+<li id="pragma-line-31">영어와 함께 필수</li>
+<li id="pragma-line-32">C++, C, Javascript, Swift, Rust, ...
+<ul id="pragma-line-33">
+<li id="pragma-line-33">가능하면, 개발자의 주석도 읽어라
+<ul id="pragma-line-34">
+<li id="pragma-line-34">개발자의 커밋도 읽어라</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-35">대상 어셈블리어와 CPU구조를 배워라
+<ul id="pragma-line-36">
+<li id="pragma-line-36">Calling convention, branch, side effect, ...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-37">Playing Good CTF * *
+<ul id="pragma-line-38">
+<li id="pragma-line-38">CTF관심 있으면, 팀을 만들어도 나쁘지 않다
+<ul id="pragma-line-39">
+<li id="pragma-line-39">다른 해커들과 협업하는 법을 배울 수 있다</li>
+</ul>
+</li>
+<li id="pragma-line-40">멘탈을 붙잡자
+<ul id="pragma-line-41">
+<li id="pragma-line-41">밤샘 CTF는 정신건강에 나쁘다</li>
+<li id="pragma-line-42">자신감을 잃는다
+<ul id="pragma-line-43">
+<li id="pragma-line-43">치팅의 늪으로 빠져든다</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-44">몇몇 좋은 CTF는 현실보다도 어렵다</li>
+</ul>
+</li>
+<li id="pragma-line-45">Health Care * * * * *
+<ul id="pragma-line-46">
+<li id="pragma-line-46">아프면 병원에 가자
+<ul id="pragma-line-47">
+<li id="pragma-line-47">제발.</li>
+<li id="pragma-line-48">프로젝트한다고 병원 안가면 쓰러진다</li>
+</ul>
+</li>
+<li id="pragma-line-49">운동해라
+<ul id="pragma-line-50">
+<li id="pragma-line-50">공부 집중 안될때 운동해라</li>
+<li id="pragma-line-51">연구 집중 안될때 운동해라</li>
+</ul>
+</li>
+<li id="pragma-line-52">코드리뷰 하지 마라</li>
+</ul>
+</li>
+<li id="pragma-line-53">Mental Care * * * * *
+<ul id="pragma-line-54">
+<li id="pragma-line-54">버그/Exploit 찾기는 고통의 연속이다
+<ul id="pragma-line-55">
+<li id="pragma-line-55">리포트 제출하기 직전에 이미 패치되어버렸거나</li>
+<li id="pragma-line-56">다른 사람들에게 벽을 느끼거나
+<ul id="pragma-line-57">
+<li id="pragma-line-57">트위터에는 수많은 보안 전문가들이 있다</li>
+<li id="pragma-line-58">그들의 트윗을 읽을때면 우울해진다</li>
+<li id="pragma-line-59">하지만 기억하자. 나는 추종자가 아니다. 저 사람과 같은 연구자다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-60">가능하면 연구/코드에서 멀어지자
+<ul id="pragma-line-61">
+<li id="pragma-line-61">내 경우엔 문명6/림월드를 한다 (같이 할 사람 구함)</li>
+<li id="pragma-line-62">문 열고, 방 밖으로 나가 바람을 쐬자</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-63">Always be humble
+<ul id="pragma-line-64">
+<li id="pragma-line-64">겸손하자
+<ul id="pragma-line-65">
+<li id="pragma-line-65">내가 겸손하지 않은 사람과 일하기 싫듯이 남들도 겸손하지 않은 나와 일하기 싫다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="section-3"><a id="pragma-line-67"></a>그 다음은?</h2>
+<ul id="pragma-line-69">
+<li id="pragma-line-69">대상을 정하자
+<ul id="pragma-line-70">
+<li id="pragma-line-70">대상의 모든 정보를 준비하자</li>
+<li id="pragma-line-71">대상의 버그 바운티 범위와 규칙을 확인하자</li>
+</ul>
+</li>
+<li id="pragma-line-72">도구를 준비하자
+<ul id="pragma-line-73">
+<li id="pragma-line-73">IDA, QEMU, JetBra$ns&hellip;</li>
+</ul>
+</li>
+<li id="pragma-line-74">이미 밝혀진 버그들을 연구해보자
+<ul id="pragma-line-75">
+<li id="pragma-line-75">1-day 보안 버그를 연구하자</li>
+</ul>
+</li>
+<li id="pragma-line-76">계획을 수립하자
+<ul id="pragma-line-77">
+<li id="pragma-line-77">Auduiting할지</li>
+<li id="pragma-line-78">Fuzzing할지</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-4"><a id="pragma-line-80"></a>시작하자&hellip;</h2>
+<ul id="pragma-line-82">
+<li id="pragma-line-82">대상에서 흥미로운걸 발견했다면?
+<ul id="pragma-line-83">
+<li id="pragma-line-83">exploitable한지 검증하자</li>
+<li id="pragma-line-84">버그 리포트를 작성하자
+<ul id="pragma-line-85">
+<li id="pragma-line-85">최대한 상세하게 작성하자</li>
+</ul>
+</li>
+<li id="pragma-line-86">가능하면, PoC나 exploit code를 첨부하자
+<ul id="pragma-line-87">
+<li id="pragma-line-87">그냥 버그는 패치와 동시에 보상도 없다</li>
+<li id="pragma-line-88">exploit code를 첨부하면
+<ul id="pragma-line-89">
+<li id="pragma-line-89">보수가 커진다</li>
+</ul>
+</li>
+<li id="pragma-line-90">PoC를 첨부하면
+<ul id="pragma-line-91">
+<li id="pragma-line-91">reject당하지 않을 가능성이 높아진다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-92">만약 의미없는 버그 리포트를 반복적으로 제출하면?
+<ul id="pragma-line-93">
+<li id="pragma-line-93">블랙리스트에 올라간다</li>
+<li id="pragma-line-94">의미있는 것만 보내자</li>
+</ul>
+</li>
+</ul>
+
+</main>
+
+</body>
+
+</html> 
