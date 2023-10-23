@@ -21,8 +21,8 @@ along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="keywords" content=""/>
-    <title>Welcome!</title>
+    <meta name="keywords" content="Development"/>
+    <title>09: 개발 모델, 개발 방법론</title>
     <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
     <link rel="defer" href="style/gfm-dark.css"/>
     <link rel="defer" href="style/post.css"/>
@@ -149,33 +149,93 @@ along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
 </nav>
 
 <header id="article-header">
-    <h1>Welcome!</h1>
+    <h1>09: 개발 모델, 개발 방법론</h1>
     <ul id="date-log">
-                    <li>Created 2023-05-01</li>
+                    <li>Created 2023-07-05</li>
     </ul>
 </header>
 
 <main id="article-main" class="markdown-body">
 
-<h2 id="section"><a id="pragma-line-2"></a>👋 안녕하세요!</h2>
-<h3 id="section-1"><a id="pragma-line-4"></a>🌱 지금</h3>
-<ul id="pragma-line-6">
-<li id="pragma-line-6">한국의 고등학생입니다.</li>
-<li id="pragma-line-7">C#이 메인 언어 입니다만, C도 꽤 합니다.</li>
+<h2 id="development-model"><a id="pragma-line-2"></a>Development-Model</h2>
+<ul id="pragma-line-4">
+<li id="pragma-line-4">Waterfall Model</li>
+<li id="pragma-line-5">Prototype Model</li>
+<li id="pragma-line-6">Spiral Model</li>
+<li id="pragma-line-7">Incremental Model</li>
+<li id="pragma-line-8">Evolutionary Model</li>
 </ul>
-<h3 id="section-2"><a id="pragma-line-9"></a>📫 연락처</h3>
-<ul id="pragma-line-11">
-<li id="pragma-line-11">Email: <a href="mailto:sharp0802.business@gmail.com">sharp0802.business@gmail.com</a></li>
-<li id="pragma-line-12">Academic Email: <a href="mailto:syw0802.dev@dimigo.hs.kr">syw0802.dev@dimigo.hs.kr</a></li>
-<li id="pragma-line-13">Blog: <a href="https://sharp0802.github.io">sharp0802.github.io</a></li>
+<h2 id="history-of-development-methodology"><a id="pragma-line-10"></a>History of Development-Methodology</h2>
+<p id="pragma-line-12">1960-1970: Early Years
+1970-1985: Project Years
+1980-2000: Process Years
+1995-: Product Era</p>
+<p id="pragma-line-17">1970: 구조적 프로그래밍(High Order Lang)
+1975: Waterfall Life cycle Model
+1980: Top-down 구조적 분석/설계
+1970-1985: 구조적 방법론(예측)</p>
+<p id="pragma-line-22">1985: 정보공학
+1990: 4GL
+1985-2000: 정보공학 방법론
+- ISP:
+- SOfC, SOC(Seperate Of Concern): 프로세스와 데이터를 분리</p>
+<p id="pragma-line-28">1990: Spiral Life cycle Model
+1995: 객체지향
+1990-2000: 객체지향 방법론
+- Sequence Diagram
+- 즉 프로세스를 관리하는데에 좋은 방법론</p>
+<p id="pragma-line-34">2000: 재사용
+2000: MDA, SOA, PL
+2015: Agile
+1995-: CBD 방법론</p>
+<h2 id="mdamodel-driven-architecture"><a id="pragma-line-39"></a>MDA(Model Driven Architecture)</h2>
+<ol id="pragma-line-41">
+<li id="pragma-line-41"><p id="pragma-line-41">응용 분석 영역</p>
+</li>
+<li id="pragma-line-42"><p id="pragma-line-42">기본 설계 모델</p>
+</li>
+<li id="pragma-line-44"><p id="pragma-line-44">상세설계모델</p>
+</li>
+</ol>
+<h2 id="agile"><a id="pragma-line-46"></a>Agile</h2>
+<ul id="pragma-line-48">
+<li id="pragma-line-48">XP(eXtreme Programming)
+<ul id="pragma-line-49">
+<li id="pragma-line-49">피의용단존</li>
+<li id="pragma-line-50">12가지 핵심훈련
+<ul id="pragma-line-51">
+<li id="pragma-line-51">계획절차</li>
+<li id="pragma-line-52">소규모릴리즈: 작은 시스템을 먼저 만들고, 짧은 주기로 업데이트한다</li>
+<li id="pragma-line-53">상징: 공통적인 이름의 체계를 갖고 공통적인 시스템 서술서를 같가되면, 개발과 의사소통을 돕는다</li>
+<li id="pragma-line-54">단순설계: 미래를 위해서 설계하지 않는다</li>
+<li id="pragma-line-55">테스팅: TDD해라</li>
+<li id="pragma-line-56">리팩토링: 개발하는 동안 내내 설계를 향상시켜라</li>
+<li id="pragma-line-57">짝 프로그래밍: 개발자 둘이서 프로그래밍하라</li>
+<li id="pragma-line-58">공동쇼유: 모든 코드는 모든 개발자에게 속해있다</li>
+<li id="pragma-line-59">CI/CD: 매일 여러 번씩 빌드해라(빌드가 실패해도, 이전 빌드로 되돌리면 된다)</li>
+<li id="pragma-line-60">주당 40시간</li>
+<li id="pragma-line-61">현장고객 지원</li>
+<li id="pragma-line-62">Coding Standard</li>
 </ul>
-<h3 id="github-stats"><a id="pragma-line-15"></a>🔭 Github Stats</h3>
-<a href="https://github.com/anuraghazra/github-readme-stats">
-  <img align="left" src="https://github-readme-stats.vercel.app/api?username=Sharp0802&show_icons=true&theme=github_dark&hide_border=true" />
-</a>
-<a href="https://github.com/anuraghazra/github-readme-stats">
-  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sharp0802&langs_count=8&layout=compact&theme=github_dark&hide_border=true" />
-</a>
+</li>
+</ul>
+</li>
+<li id="pragma-line-63">SCRUM
+<ul id="pragma-line-64">
+<li id="pragma-line-64">Product Backlog</li>
+<li id="pragma-line-65">Sprint 단거리 구간 #1, # To-Do, Doing, Done, Issue</li>
+<li id="pragma-line-66">(Daily) (SCRUM) Meeting</li>
+<li id="pragma-line-67">Sprint Review</li>
+<li id="pragma-line-68">Retrospective 회고: 잘한 점, 못한 점, 개선할 점</li>
+<li id="pragma-line-69">Burn-down Chard</li>
+</ul>
+</li>
+</ul>
+<h2 id="pmi-pmbokproject-management-body-of-knowledge"><a id="pragma-line-71"></a>PMI, PMBOK(Project Management Body Of Knowledge)</h2>
+<h2 id="cqd-triangle"><a id="pragma-line-73"></a>CQD triangle</h2>
+<p id="pragma-line-75">C: Cost
+Q: Quality
+D: Delivery</p>
 
 </main>
 

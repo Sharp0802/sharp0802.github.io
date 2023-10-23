@@ -1,0 +1,460 @@
+﻿<!--
+Copyright (C) 2023  Yeong-won Seo
+
+SIKA is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+SIKA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="Development,Hacking"/>
+    <title>11: 하드웨어 보안</title>
+    <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
+    <link rel="defer" href="style/gfm-dark.css"/>
+    <link rel="defer" href="style/post.css"/>
+    <link rel="defer" href="style/hl-github-dark.min.css"/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' defer></script>
+    <script src="script/highlight.min.js" defer></script>
+    <script src="script/defer-css.js" defer></script>
+    <script src="script/treeview.js" defer></script>
+    <script src="script/search.js" defer></script>
+</head>
+
+<body>
+
+<nav class="sidenav">
+    <!-- PROFILE -->
+    <section id="profile">
+        <img alt="" id="profile-img" src="https://avatars.githubusercontent.com/u/64760536?v=4"/>
+        <h3>Sharp0802</h3>
+        <ul id="contacts">
+                <li class="github-logo"><a href="https://www.github.com/Sharp0802">GitHub Account</a></li>
+                <li class="email-logo"><a href="mailto:sharp0802.business@gmail.com">Email</a></li>
+        </ul>
+    </section>
+
+    <br/>
+
+    <!-- SEARCH FORM -->
+    <form role="search" id="search-form">
+        <svg viewBox="0 0 1024 1024">
+            <path d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"/>
+        </svg>
+        <input id="search-box" type="text" placeholder="Search"/>
+    </form>
+
+    <!-- TREE VIEW -->
+    <ul id="tree-view">
+        <li>
+  <a href="/error.html">404!</a>
+</li>
+<li>
+  <a href="/index.html">Welcome!</a>
+</li>
+<li>
+  <span class="caret">C#_Unity</span>
+  <ul class="nested">
+    <li>
+      <span class="caret">NetFramework</span>
+      <ul class="nested">
+        <li>
+          <a href="/2022-02-06-accessviolationexception.html">Handling AccessViolationException</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span class="caret">Unity</span>
+      <ul class="nested">
+        <li>
+          <a href="/2022-03-01-ellipse-in-tilemap.html">Unity Tilemap에서 C#을 이용해 타원그리기</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">C_C++</span>
+  <ul class="nested">
+    <li>
+      <a href="/2022-02-06-svml-in-clang-cl.html">Clang-cl에서 SVML 사용하기</a>
+    </li>
+    <li>
+      <a href="/2023-02-23-about-nostdlib-nostartfiles.html">--nostdlib과 --nostartfiles에 대하여</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">Hacking</span>
+  <ul class="nested">
+    <li>
+      <a href="/00_define_hack.html">00: 해커와 해킹</a>
+    </li>
+    <li>
+      <a href="/01_think_as_hacker.html">01: 해커다운 생각</a>
+    </li>
+    <li>
+      <a href="/02E_how_to_find_vulnerability.html">02: 어떻게 취약점을 찾는가: 과제</a>
+    </li>
+    <li>
+      <a href="/02_how_to_find_vulnerabilities.html">02: 어떻게 취약점을 찾는가</a>
+    </li>
+    <li>
+      <a href="/03_what_is_digital_forensic.html">03: 디지털 포렌식?</a>
+    </li>
+    <li>
+      <a href="/04_mobile_virus_analysis.html">04: 모바일 악성코드 분석</a>
+    </li>
+    <li>
+      <a href="/05_bug_hunting.html">05: 버그 헌팅</a>
+    </li>
+    <li>
+      <a href="/06_law_for_hacker.html">06: 해킹과 법률</a>
+    </li>
+    <li>
+      <a href="/07_file_recovering_deleting.html">07: FS, 파일 복구 및 삭제 원리</a>
+    </li>
+    <li>
+      <a href="/08_financial_security.html">08: 금융 보안</a>
+    </li>
+    <li>
+      <a href="/09_development_model.html">09: 개발 모델, 개발 방법론</a>
+    </li>
+    <li>
+      <a href="/10_cryptology.html">10: 기초 암호학</a>
+    </li>
+    <li>
+      <a href="/11_hardware_security.html">11: 하드웨어 보안</a>
+    </li>
+    <li>
+      <a href="/12_pentesting.html">12: 모의해킹</a>
+    </li>
+  </ul>
+</li>
+
+    </ul>
+</nav>
+
+<header id="article-header">
+    <h1>11: 하드웨어 보안</h1>
+    <ul id="date-log">
+                    <li>Created 2023-07-05</li>
+    </ul>
+</header>
+
+<main id="article-main" class="markdown-body">
+
+<h2 id="section"><a id="pragma-line-2"></a>컴퓨터의 구조</h2>
+<ol id="pragma-line-4">
+<li id="pragma-line-4">응용 프로그램(User Space)
+<ul id="pragma-line-5">
+<li id="pragma-line-5">모든 프로그램의 실행 환경</li>
+<li id="pragma-line-6">일반 사용자와 관리자로 권한 구분(Ring 3)</li>
+<li id="pragma-line-7">백신, 실행파일 <strong>무결성 검증</strong> 필요</li>
+</ul>
+</li>
+<li id="pragma-line-8">커널(Kernel Space)
+<ul id="pragma-line-9">
+<li id="pragma-line-9">운영체제 핵심 역할 및 시스템 서비스 제공</li>
+<li id="pragma-line-10">과거 소프트웨어 플랫폼의 최고 권한(Ring 0)</li>
+<li id="pragma-line-11">a.k.a VMM(Virtual Machine Monitor)</li>
+<li id="pragma-line-12">커널 및 드라이버 <strong>무결성 검증</strong>(신뢰 기반) 필요</li>
+</ul>
+</li>
+<li id="pragma-line-13">하이퍼바이저
+<ul id="pragma-line-14">
+<li id="pragma-line-14">가상 머신 생성, 관리, 운영 서비스 제공</li>
+<li id="pragma-line-15">현재 소프트웨어 플랫폼의 최고 권한(Ring -1)
+<ul id="pragma-line-16">
+<li id="pragma-line-16">커널보다 권한이 높아 커널 무결성 검증 가능</li>
+</ul>
+</li>
+<li id="pragma-line-17">하이퍼바이저 <strong>무결성 검증</strong> 필요</li>
+</ul>
+</li>
+<li id="pragma-line-18">펌웨어
+<ul id="pragma-line-19">
+<li id="pragma-line-19">단말 하드웨어 초기화 및 단말 부팅 담당</li>
+<li id="pragma-line-20">하드웨어 내부의 소프트웨어</li>
+<li id="pragma-line-21">펌웨어 <strong>무결성 검증</strong>(신뢰 기반) 필요</li>
+</ul>
+</li>
+<li id="pragma-line-22">하드웨어
+<ul id="pragma-line-23">
+<li id="pragma-line-23">단말의 물리적 구성 담당
+<ul id="pragma-line-24">
+<li id="pragma-line-24">CPU, RAM, mainboard, HDD/SSD, TPM</li>
+</ul>
+</li>
+<li id="pragma-line-25">광학 조사 및 x-ray 투과 등으로 변조 흔적 탐지</li>
+</ul>
+</li>
+</ol>
+<p id="pragma-line-27">1-3: 소프트웨어 플랫폼
+4-5: 하드웨어 플랫폼</p>
+<h2 id="section-1"><a id="pragma-line-30"></a>신뢰 체인</h2>
+<blockquote id="pragma-line-32" class="blockquote">
+<blockquote id="pragma-line-32" class="blockquote">
+<p id="pragma-line-32">선 검증, 후 실행</p>
+</blockquote>
+</blockquote>
+<ol id="pragma-line-34">
+<li id="pragma-line-34">하드웨어에서부터 User space로 이르기까지 먼저 무결성을 검증하고</li>
+<li id="pragma-line-35">User space에서 헤드웨어에 이르기까지 실행한다</li>
+</ol>
+<p id="pragma-line-37">이러한 방법으로 신뢰 체인(trust chain)을 형성한다.</p>
+<h2 id="integrity"><a id="pragma-line-39"></a>무결성(integrity) 검증 기법</h2>
+<ul id="pragma-line-41">
+<li id="pragma-line-41">코드 서명(code signing):
+<ul id="pragma-line-42">
+<li id="pragma-line-42">실행 파일에 디지털 서명을 추가</li>
+<li id="pragma-line-43">서명한 이후로 실행 파일이 수정 또는 변조되는 것을 방지</li>
+</ul>
+</li>
+<li id="pragma-line-44">무결성 측정(integrity measurement):
+<ul id="pragma-line-45">
+<li id="pragma-line-45">실행파일의 측정 값(hash)을 신뢰할 수 있는 저장소에 누적
+<ul id="pragma-line-46">
+<li id="pragma-line-46">e.g.) TPM</li>
+</ul>
+</li>
+<li id="pragma-line-47">누적된 측정값을 정상 상태의 측정값과 비교하여 잔말 상태가 정상 혹은 비정상인지 확인</li>
+</ul>
+</li>
+</ul>
+<h2 id="inget-boot-guard"><a id="pragma-line-49"></a>Inget Boot Guard</h2>
+<ul id="pragma-line-51">
+<li id="pragma-line-51">CPU와 PCH(Platform Control Hub)를 이용해 부팅 검증
+<ul id="pragma-line-52">
+<li id="pragma-line-52">Intel ME(Management Engine)에 저장된 key이용</li>
+<li id="pragma-line-53">이후에 실행될 Firmware(BIOS)의 서명 검증 수행</li>
+</ul>
+</li>
+<li id="pragma-line-54">UEFI활용 및 펌웨어의 서명 검증
+<ul id="pragma-line-55">
+<li id="pragma-line-55">UEFI firmware의 가장 첫 번째 모듈(Initial Boot Block, IBB)의 무결성 검증</li>
+</ul>
+</li>
+</ul>
+<h2 id="uefi-secureboot"><a id="pragma-line-57"></a>UEFI SecureBoot</h2>
+<ul id="pragma-line-59">
+<li id="pragma-line-59">펌웨어에 내장된 key를 이용하여 서명 검증
+<ul id="pragma-line-60">
+<li id="pragma-line-60">3단계 구조(PK, KEK, DB)로 키 관리</li>
+<li id="pragma-line-61">BIOS 메뉴를 통해 키 추가 및 삭제 가능
+<ul id="pragma-line-62">
+<li id="pragma-line-62">주의) BIOS 관리자 패스워드 설정 필요</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-63">bootloader의 서명 확인 및 실행 담당
+<ul id="pragma-line-64">
+<li id="pragma-line-64">OS 실행에 필요한 첫 번째 모듈인 부트로더의 무결성 검증</li>
+<li id="pragma-line-65">이후, 하이퍼바이저 또는 커널의 무결성은 부트로더가 검증</li>
+</ul>
+</li>
+</ul>
+<h2 id="microsoft-hvci"><a id="pragma-line-67"></a>Microsoft HVCI</h2>
+<ul id="pragma-line-69">
+<li id="pragma-line-69">하이퍼바이저에 내장된 key를 이용하여 서명 검증
+<ul id="pragma-line-70">
+<li id="pragma-line-70">Intel VT나 AMD-V를 활용하여 커널 및 머널 모듈의 실행 감시
+<ul id="pragma-line-71">
+<li id="pragma-line-71">이벤트 탐지 및 하이퍼콜(hypercall)활용</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-72">커널 및 머널 모듈의 서명 확인 및 실행 담당
+<ul id="pragma-line-73">
+<li id="pragma-line-73">OS의 핵심 영역인 커널과 커널 모듈의 무결성 검증</li>
+<li id="pragma-line-74">이루 runtime에 지속적으로 커널 및 모듈의 변조를 감시하고 이를 방어</li>
+</ul>
+</li>
+</ul>
+<h2 id="syscall-vs-hypercall"><a id="pragma-line-76"></a>Syscall vs Hypercall</h2>
+<ul id="pragma-line-78">
+<li id="pragma-line-78">syscall
+<ul id="pragma-line-79">
+<li id="pragma-line-79"><code>int $0x80</code></li>
+<li id="pragma-line-80"><code>sysenter</code></li>
+<li id="pragma-line-81"><code>syscall</code></li>
+</ul>
+</li>
+<li id="pragma-line-82">hypercall
+<ul id="pragma-line-83">
+<li id="pragma-line-83"><code>vmcall</code></li>
+<li id="pragma-line-84">User Space에서도 Hypervisor을 호출할 수 있다!</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-2"><a id="pragma-line-86"></a>코드 서명의 장단점</h2>
+<ul id="pragma-line-88">
+<li id="pragma-line-88">장점
+<ul id="pragma-line-89">
+<li id="pragma-line-89">검증 절차가 단순 명료하고, 별도의 하드웨어가 필요 없음</li>
+</ul>
+</li>
+<li id="pragma-line-90">단점
+<ul id="pragma-line-91">
+<li id="pragma-line-91">유효성이 만료된 서명의 처리가 어려움
+<ul id="pragma-line-92">
+<li id="pragma-line-92">e.g.) 특정 응용프로그램에 취약점이 있어서 신규버전으로 업데이트 및 실행이 되었는지 확인하고 싶다면?</li>
+</ul>
+</li>
+<li id="pragma-line-93">안전한 저장공간의 부재로 서명 검증 결과를 프로그램의 실행과 연결할 수 밖에 없음</li>
+</ul>
+</li>
+</ul>
+<h2 id="tpm"><a id="pragma-line-95"></a>TPM</h2>
+<ul id="pragma-line-97">
+<li id="pragma-line-97"><p id="pragma-line-97">변조 방지(tamper-resistant) 설계가 된 디바이스</p>
+<ul id="pragma-line-98">
+<li id="pragma-line-98">프로세서, RAM, ROM, NVRAM 내장</li>
+<li id="pragma-line-99">CPU와 별개로 자신의 상태를 유지</li>
+</ul>
+</li>
+<li id="pragma-line-100"><p id="pragma-line-100">암호 연산 기능과 측정값 누적 기능 제공</p>
+<ul id="pragma-line-101">
+<li id="pragma-line-101">측정값은 PCR(Platform Configuration Register)에 저장</li>
+</ul>
+</li>
+<li id="pragma-line-103"><p id="pragma-line-103">저장된 측정값을 이용하여 시스템 신뢰성을 판단하는데 사용 가능</p>
+<ul id="pragma-line-104">
+<li id="pragma-line-104">PCR에 저장된 값을 로컬에서 확인하거나 원격 검증(remote-attestation)을 통해 확인</li>
+</ul>
+</li>
+<li id="pragma-line-105"><p id="pragma-line-105">PCR의 특정 값을 이용해서 비밀(secret)에 접근 제어 가능</p>
+<ul id="pragma-line-106">
+<li id="pragma-line-106">Seal명령은 PCR 값을 이용해서 데이터를 암호화</li>
+<li id="pragma-line-107">Unseal명령은 PCR값을 이용해서 암호화된 데이터를 복호화</li>
+<li id="pragma-line-108">Microsoft Bitlocker 및 Windows Hello도 TPM 활용</li>
+</ul>
+</li>
+</ul>
+<h2 id="rtm-root-of-trust-for-measurement"><a id="pragma-line-110"></a>RTM (Root of Trust for Measurement)</h2>
+<ul id="pragma-line-112">
+<li id="pragma-line-112">RTM은 TPM에게 측정값(measurement) 정보를 전송
+<ul id="pragma-line-113">
+<li id="pragma-line-113">TPM은 PCR에 저장된 이전 값과 함께 신규 측정값을 저장</li>
+<li id="pragma-line-114">Extend: <span class="math">\(PCR_{new} = Hash(PCR_{old} || Measurement_{new})\)</span></li>
+</ul>
+</li>
+</ul>
+<h2 id="state-of-the-art-boot-process"><a id="pragma-line-116"></a>State-Of-The-Art Boot Process</h2>
+<ul id="pragma-line-118">
+<li id="pragma-line-118"><p id="pragma-line-118">Intel BootGuard</p>
+</li>
+<li id="pragma-line-119"><p id="pragma-line-119">Intel Bios Guard</p>
+</li>
+<li id="pragma-line-121"><p id="pragma-line-121">Secure Boot</p>
+</li>
+<li id="pragma-line-123"><p id="pragma-line-123">TPM</p>
+</li>
+<li id="pragma-line-125"><p id="pragma-line-125">OS</p>
+<ul id="pragma-line-126">
+<li id="pragma-line-126">Disk Encryption</li>
+<li id="pragma-line-127">Remote Attenstation</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-3"><a id="pragma-line-129"></a>전원이 켜지면</h2>
+<ol id="pragma-line-131">
+<li id="pragma-line-131">CPU는 BIOS의 코드서명 검사</li>
+<li id="pragma-line-132">BIOS/UEFI는 BIOS/UEFI, 부트로더의 해쉬를 TPM에 저장</li>
+<li id="pragma-line-133">BIOS/UEFI는 부트로더의 코드서명 검사</li>
+<li id="pragma-line-134">Bootloader는 커널의 해쉬를 TPM에 저장</li>
+<li id="pragma-line-135">부트로더는 커널의 코드서명 검사</li>
+<li id="pragma-line-136">Remote Attestation Server는 TPM에게 요청하여 무결성이 유지되었는지 검사</li>
+</ol>
+<h2 id="os"><a id="pragma-line-138"></a>OS에 따른 최신 보안기술</h2>
+<p id="pragma-line-140">응용프로그램: CFI(Control-Flow Integrity)
+커널: 응용프로그램 서명 검증, CFI(Control-Flow Integrity)
+Hypervisor: VBS(Virtualization-Based Security) (ms-windows-only)</p>
+<h2 id="section-4"><a id="pragma-line-144"></a>경량 가상화 기반 운영체제 보호 기술</h2>
+<ul id="pragma-line-146">
+<li id="pragma-line-146"><p id="pragma-line-146">Intel: Light-Box(Lightweight Hypervisor)</p>
+<ul id="pragma-line-147">
+<li id="pragma-line-147">Host(Ring-1)
+<ul id="pragma-line-148">
+<li id="pragma-line-148">Shadow-Watcher(Monitor)
+<ul id="pragma-line-149">
+<li id="pragma-line-149">Guest에 대한 권한을 가진다</li>
+</ul>
+</li>
+<li id="pragma-line-150">Shared Kernel (RW)</li>
+</ul>
+</li>
+<li id="pragma-line-151">Guest(Ring 0~3)
+<ul id="pragma-line-152">
+<li id="pragma-line-152">Host를 향한 접근은 차단된다</li>
+<li id="pragma-line-153">Shared Kernel (R-)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="pragma-line-155"><p id="pragma-line-155">ARM: TrustZone → Light-Box(Trusted App &amp; Trusted Kernel)</p>
+<ul id="pragma-line-156">
+<li id="pragma-line-156">Secure 영역과 다른 영역을 완전히 분리
+<ol id="pragma-line-157">
+<li id="pragma-line-157">User Application은 일반 커널과 통신한다</li>
+<li id="pragma-line-158">일반 커널은 Trusted Kernel(OP-TEE)에 SMC call을 보낸다</li>
+<li id="pragma-line-159">Trusted Kernel은 Shadow-Watcher를 통해 User Application을 모니터링한다</li>
+<li id="pragma-line-160">일정 기간동안 SMC call이 발생하지 않으면, Trusted Kernel은 일반 커널이 점거되었다고 간주한다</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="kernel-mode-heap"><a id="pragma-line-162"></a>Kernel mode heap 할당</h2>
+<p id="pragma-line-164">Kernel모드에서는 메모리가 할당될때 페이지 단위로 할당된다</p>
+<p id="pragma-line-166">special cache가 있는 이유는 권한 관련된 오브젝트들이 오버플로우가 나면 권한상승이 되기 때문에, 이러한 취약점을 방지하기 위해 따로 일반 캐쉬로 페이지를 저장한다.</p>
+<p id="pragma-line-168">freelist 참조
+freelist에 유휴 공간 없다면 page의 공간을 freelist로 이동
+page에 유휴 공간 없다면 partial page의 공간을 freelist로 이동</p>
+<h2 id="scheduler"><a id="pragma-line-172"></a>Scheduler</h2>
+<p id="pragma-line-174">FCFS: First Come First Serve
+SJF: Shortest Job First
+- Starvation Effect
+Priority:
+- Every process has a priority
+- Aging: The longer process is pending, the higher priority</p>
+<h2 id="scheduler-option"><a id="pragma-line-181"></a>Scheduler Option</h2>
+<ul id="pragma-line-183">
+<li id="pragma-line-183"><p id="pragma-line-183">CONFIG_PREEMPT_VOLUNTARY</p>
+</li>
+<li id="pragma-line-184"><p id="pragma-line-184">It is default configuration for desktop</p>
+</li>
+<li id="pragma-line-185"><p id="pragma-line-185">This configuration provides preemption point in kernel code</p>
+</li>
+<li id="pragma-line-186"><p id="pragma-line-186">If the kernel code meets</p>
+</li>
+<li id="pragma-line-188"><p id="pragma-line-188">CONFIG_PREEMPT</p>
+</li>
+<li id="pragma-line-189"><p id="pragma-line-189">It is default configuration for Android</p>
+</li>
+<li id="pragma-line-190"><p id="pragma-line-190">This option recudes the latency of the kernel by makign all kernel code preemptible</p>
+</li>
+<li id="pragma-line-191"><p id="pragma-line-191">Except for the case when the kernel code is in the critical section</p>
+</li>
+</ul>
+
+</main>
+
+</body>
+
+</html> 
