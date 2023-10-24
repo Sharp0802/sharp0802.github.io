@@ -21,8 +21,8 @@ along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="keywords" content="C#,.Net,AccessViolationException,SEH"/>
-    <title>Handling AccessViolationException</title>
+    <meta name="keywords" content="C,C++,Concepts,Memory,Pointer"/>
+    <title>Little-Endian과 포인터</title>
     <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
     <link rel="defer" href="style/gfm-dark.css"/>
     <link rel="defer" href="style/post.css"/>
@@ -163,59 +163,40 @@ along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
 </nav>
 
 <header id="article-header">
-    <h1>Handling AccessViolationException</h1>
+    <h1>Little-Endian과 포인터</h1>
     <ul id="date-log">
-                    <li>Created 2022-02-06</li>
-                    <li>Updated 2023-05-01</li>
-                    <li>Updated 2023-05-03</li>
+                    <li>Created 2023-10-23</li>
     </ul>
 </header>
 
 <main id="article-main" class="markdown-body">
 
-<h2 id="section"><a id="pragma-line-2"></a>문제</h2>
-<p id="pragma-line-4">문제가 생겼다</p>
-<p id="pragma-line-6">무슨짓을 해도 System.AccessViolationException을 핸들링할 수가 없다</p>
-<p id="pragma-line-8">답은 MS 공식 문서에 서술되어 있다</p>
-<blockquote id="pragma-line-10" class="blockquote">
-<p id="pragma-line-10">Starting with .NET Framework 4,
-AccessViolationException exceptions thrown by the common language runtime are not handled by the catch statement
-in a structured exception handler if the exception occurs outside of the memory reserved by the common language runtime.</p>
-</blockquote>
-<p id="pragma-line-14">net4.x부터 CLR에 의해 예약된 메모리 외부에서 오류가 발생하여, CLR에 의해 throw된 AccessViolationException은 구조적인 예외 처리기 문(catch)에서 처리되지 않는다</p>
-<h2 id="section-1"><a id="pragma-line-16"></a>해결</h2>
-<p id="pragma-line-18">물론, 해결법 또한 MS 공식 문서에 서술되어 있다</p>
-<blockquote id="pragma-line-20" class="blockquote">
-<p id="pragma-line-20">To handle such an AccessViolationException exception,
-apply the HandleProcessCorruptedStateExceptionsAttribute attribute to the method in which the exception is thrown.</p>
-</blockquote>
-<p id="pragma-line-23">간단히, HandleProcessCorruptedStateExceptionsAttribute를 메서드에 추가하도록 하자</p>
-<pre><code id="pragma-line-25" class="language-Csharp">// AccessViolationException을 throw하는 함수
-[method: DllExport(&quot;xxx.dll&quot;)]
-private static extern void ThrowAccessViolationException();
-
-[method: HandleProcessCorruptedStateExceptions]
-private static void CatchAccessViolationException()
-{
-	try
-	{
-		ThrowAccessViolationException();
-	}
-	catch (AccessViolationException)
-	{
-		...
-	}
-}
+<p id="pragma-line-2">포인터는 항상 데이터의 첫 바이트를 가리킨다.
+문자열을 생각해보면 꽤 합당하고,
+암묵적으로 받아들이고 있었을 말이다.</p>
+<pre><code id="pragma-line-6">| 00 | 11 | 22 | 33 |
 </code></pre>
-<p id="pragma-line-44">혹은, 호환성을 위해 net3.x 이전의 동작으로 되돌리고 싶다면, App.config를 만들어보자</p>
-<p id="pragma-line-46">configuration태그 안의 runtime태그 안에 legacyCorruptedStateExceptionsPolicy태그를 생성하고, enable속성을 true로 바꾸어주자</p>
-<p id="pragma-line-48">App.config를 전에 건드린적이 없다면, 아래와 같은 모습이 되어야 한다</p>
-<pre><code id="pragma-line-50" class="language-xml">&lt;configuration&gt;
-	&lt;runtime&gt;
-		&lt;legacyCorruptedStateExceptionsPolicy enabled=&quot;true&quot;/&gt;
-	&lt;/runtime&gt;
-&lt;/configuration&gt;
+<p id="pragma-line-10">4바이트 정수형 변수 A(0x00112233)가 메모리상에 다음과 같이 배치되었을때,
+A를 가리키는 포인터 pA는 char*로 형변환 하였을때에,
+역참조한다면 00이 출력되어야 할것만 같다.</p>
+<p id="pragma-line-14">하지만, 33이 출력된다. (대부분의 x86기반 컴퓨터에서)</p>
+<p id="pragma-line-16">4바이트 정수 0x00112233은 메모리 주소상에 다음과 같이 배치되기 때문이다.</p>
+<pre><code id="pragma-line-18">| 33 | 22 | 11 | 00 |
 </code></pre>
+<p id="pragma-line-22">이렇게 바이트의 순서가 역순 꼴을 띄고 있는 것을 Little-Endian,
+그렇지 않은 것을 Big-Endian이라고 한다.</p>
+<h2 id="section"><a id="pragma-line-25"></a>왜?</h2>
+<p id="pragma-line-27">본몬에서는 깊이 들어가지 않고,
+자료형과 주소에 관하여만 서술하겠다.</p>
+<p id="pragma-line-30">int형 0x00112233을 char형으로 형변환하기로 하자.
+이때, truncation이 발생하여 0x33이 되는것이 바람직해보인다.</p>
+<p id="pragma-line-33">이때, 효율적으로 형변환을 구현하기 위해,
+개발자들은 바이트열을 뒤집었다.
+33221100순으로 저장된다면,
+주소를 바꾸지 않아도 바로 형변환된 값을 얻을 수 있기 때문이다.</p>
+<h2 id="network-byte-order"><a id="pragma-line-38"></a>Network-Byte-Order</h2>
+<p id="pragma-line-40">이와 별개로, 네트워크에서는 모든 바이트를 순열(Big-Endian)로 저장하고,
+이를 Network-Byte-Order혹은 NBO라고 부른다.</p>
 
 </main>
 

@@ -21,8 +21,8 @@ along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="keywords" content="C#,.Net,AccessViolationException,SEH"/>
-    <title>Handling AccessViolationException</title>
+    <meta name="keywords" content="C,C++,Concepts,Memory,Pointer"/>
+    <title>포인터, 더 엄밀한 포인터</title>
     <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
     <link rel="defer" href="style/gfm-dark.css"/>
     <link rel="defer" href="style/post.css"/>
@@ -163,59 +163,72 @@ along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
 </nav>
 
 <header id="article-header">
-    <h1>Handling AccessViolationException</h1>
+    <h1>포인터, 더 엄밀한 포인터</h1>
     <ul id="date-log">
-                    <li>Created 2022-02-06</li>
-                    <li>Updated 2023-05-01</li>
-                    <li>Updated 2023-05-03</li>
+                    <li>Created 2023-10-23</li>
     </ul>
 </header>
 
 <main id="article-main" class="markdown-body">
 
-<h2 id="section"><a id="pragma-line-2"></a>문제</h2>
-<p id="pragma-line-4">문제가 생겼다</p>
-<p id="pragma-line-6">무슨짓을 해도 System.AccessViolationException을 핸들링할 수가 없다</p>
-<p id="pragma-line-8">답은 MS 공식 문서에 서술되어 있다</p>
-<blockquote id="pragma-line-10" class="blockquote">
-<p id="pragma-line-10">Starting with .NET Framework 4,
-AccessViolationException exceptions thrown by the common language runtime are not handled by the catch statement
-in a structured exception handler if the exception occurs outside of the memory reserved by the common language runtime.</p>
+<blockquote id="pragma-line-2" class="blockquote">
+<p id="pragma-line-2">A pointer is a variable that contains the address of a variable <br/>- K&amp;R C, second edition (1988)</p>
 </blockquote>
-<p id="pragma-line-14">net4.x부터 CLR에 의해 예약된 메모리 외부에서 오류가 발생하여, CLR에 의해 throw된 AccessViolationException은 구조적인 예외 처리기 문(catch)에서 처리되지 않는다</p>
-<h2 id="section-1"><a id="pragma-line-16"></a>해결</h2>
-<p id="pragma-line-18">물론, 해결법 또한 MS 공식 문서에 서술되어 있다</p>
-<blockquote id="pragma-line-20" class="blockquote">
-<p id="pragma-line-20">To handle such an AccessViolationException exception,
-apply the HandleProcessCorruptedStateExceptionsAttribute attribute to the method in which the exception is thrown.</p>
-</blockquote>
-<p id="pragma-line-23">간단히, HandleProcessCorruptedStateExceptionsAttribute를 메서드에 추가하도록 하자</p>
-<pre><code id="pragma-line-25" class="language-Csharp">// AccessViolationException을 throw하는 함수
-[method: DllExport(&quot;xxx.dll&quot;)]
-private static extern void ThrowAccessViolationException();
+<p id="pragma-line-4">포인터는 변수의 주소를 담은 변수다.
+그 이상을 논의하기 이전에 먼저 알아볼 것이 있다.</p>
+<pre><code id="pragma-line-7" class="language-c">int *pa;
+</code></pre>
+<p id="pragma-line-11">우리는 기초로 돌아와, 위의 코드가 문법적으로 무엇을 의미하는지 다시금 상기해볼 필요가 있다.
+기본적으로 C의 문법 체계에서 변수의 선언은 다음의 문법형식을 따른다.</p>
+<pre><code id="pragma-line-14" class="language-c">type name
+</code></pre>
+<p id="pragma-line-18"><code>name</code>은 <code>type</code>형임을 선언하는 코드다.
+그렇다면, <code>int *pa</code>는 무슨 의미일까?
+똑같이, <code>*pa</code>는 <code>int</code>형임을 명시한다.
+(K&amp;R C는 이에 대해 이러한 문법이 mnemonic하다고 설명한다)</p>
+<pre><code id="pragma-line-23" class="language-c">int *pa, *pb;
+</code></pre>
+<p id="pragma-line-27"><code>*pa</code>형이 <code>int</code>임을 명시했기에 <code>pa</code>가 <code>int</code>의 포인터가 되는 것이지,
+<code>pa</code>형이 <code>int*</code>형이기에 <code>*pa</code>가 <code>int</code>형인것은 아니다.
+원인과 결과가 역전된 꼴이다.
+<code>*</code>가 형식 뒤에 붙지 않고, 변수 선언 앞에 붙는 이유중 하나다.</p>
+<h3 id="section"><a id="pragma-line-32"></a>연산</h3>
+<pre><code id="pragma-line-34">int* pa;
 
-[method: HandleProcessCorruptedStateExceptions]
-private static void CatchAccessViolationException()
-{
-	try
-	{
-		ThrowAccessViolationException();
-	}
-	catch (AccessViolationException)
-	{
-		...
-	}
-}
+pa + 1;
+*(pa + 1);
 </code></pre>
-<p id="pragma-line-44">혹은, 호환성을 위해 net3.x 이전의 동작으로 되돌리고 싶다면, App.config를 만들어보자</p>
-<p id="pragma-line-46">configuration태그 안의 runtime태그 안에 legacyCorruptedStateExceptionsPolicy태그를 생성하고, enable속성을 true로 바꾸어주자</p>
-<p id="pragma-line-48">App.config를 전에 건드린적이 없다면, 아래와 같은 모습이 되어야 한다</p>
-<pre><code id="pragma-line-50" class="language-xml">&lt;configuration&gt;
-	&lt;runtime&gt;
-		&lt;legacyCorruptedStateExceptionsPolicy enabled=&quot;true&quot;/&gt;
-	&lt;/runtime&gt;
-&lt;/configuration&gt;
+<p id="pragma-line-41">3, 4번째줄을 보면, pa에 정수를 더하는 모습인데,
+이는 어셈블리어에서처럼 1바이트씩 더함이 아닌,
+*pa의 자료형의 크기, 즉 4(전형적으로) 바이트씩 더해주게 된다.</p>
+<pre><code id="pragma-line-46">int* pa;
+
+pa - 1;
+*(pa - 1);
 </code></pre>
+<p id="pragma-line-53">마찬가지로, 뺄셈도 정의된다.
+*pa의 자료형의 크기, 즉 4(전형적으로) 바이트씩 빼주게 된다.</p>
+<p id="pragma-line-56">마지막으로, 포인터와 포인터간의 뺄셈이 정의된다.
+포인터와 포인터 사이에 얼마나 많은 공간이 존재하는지 알려준다.</p>
+<h3 id="section-1"><a id="pragma-line-59"></a>예외</h3>
+<p id="pragma-line-61">딱 하나 예외가 있는데, 바로 <code>void*</code>형이다.</p>
+<p id="pragma-line-63">K&amp;R C에서 소개하기를, <code>void*</code>형은 generic한 포인터로,
+기본적으로 직접 역참조 할 수 없다.</p>
+<p id="pragma-line-66">K&amp;R C는 <code>memcpy</code>, <code>memset</code>등 generic한 포인터가 필요한 구간에서
+<code>char*</code>를 사용하지 말고, <code>void*</code>를 사용하기를 권장하고 있다.</p>
+<h3 id="section-2"><a id="pragma-line-69"></a>용어 정리</h3>
+<pre><code id="pragma-line-72">int *pa;
+</code></pre>
+<p id="pragma-line-76">위처럼 선언된 변수 pa를, <code>pa is a pointer to int</code>라고 부르며,
+한국어로 <code>pa는 int형의 포인터</code>라고 부른다.</p>
+<pre><code id="pragma-line-79">pa = &amp;a;
+</code></pre>
+<p id="pragma-line-83"><code>pa points to a</code>라고 부르며,
+한국어로 <code>pa</code>는 <code>a</code>를 가리킨다고 부른다.</p>
+<pre><code id="pragma-line-86" class="language-c">*pb = *pa;
+*pa = 0;
+</code></pre>
+<p id="pragma-line-91">위처럼 <code>*포인터변수</code> (본 코드에서는 <code>*pa</code>)와 같이 작성하는 것을 <code>indirection</code>(간접참조) 혹은 <code>dereferencing</code> (역참조)라고 부른다.</p>
 
 </main>
 
