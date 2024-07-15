@@ -1,0 +1,218 @@
+<!--
+Copyright (C) 2023  Yeong-won Seo
+
+SIKA is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+SIKA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="C,C&#x2B;&#x2B;,Concepts,Memory,Array"/>
+    <title>&#xBC30;&#xC5F4;, &#xB354; &#xC5C4;&#xBC00;&#xD55C; &#xBC30;&#xC5F4;</title>
+    <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
+    <link rel="defer" href="https://blog.sharp0802.com/style/gfm-dark.css"/>
+    <link rel="defer" href="https://blog.sharp0802.com/style/post.css"/>
+    <link rel="defer" href="https://blog.sharp0802.com/style/hl-github-dark.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+    <script src="https://blog.sharp0802.com/script/highlight.min.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/defer-css.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/treeview.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/search.js" defer></script>
+</head>
+
+<body>
+
+<nav class="sidenav">
+    <!-- PROFILE -->
+    <section id="profile">
+        <img alt="" id="profile-img" src="https://avatars.githubusercontent.com/u/64760536?v=4"/>
+        <h3>Sharp0802</h3>
+        <ul id="contacts">
+                <li class="github-logo"><a href="https://github.com/sharp0802">GitHub Account</a></li>
+                <li class="email-logo"><a href="mailto:syw0802@proton.me">Email</a></li>
+        </ul>
+    </section>
+
+    <br/>
+
+    <!-- SEARCH FORM -->
+    <form role="search" id="search-form">
+        <svg viewBox="0 0 1024 1024">
+            <path d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"/>
+        </svg>
+        <input id="search-box" type="text" placeholder="Search"/>
+    </form>
+
+    <!-- TREE VIEW -->
+    <ul id="tree-view">
+        <li>
+  <span class="caret">C_C++</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2022-02-06-svml-in-clang-cl.html">Clang-cl에서 SVML 사용하기</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2023-02-23-about-nostdlib-nostartfiles.html">--nostdlib과 --nostartfiles에 대하여</a>
+    </li>
+    <li>
+      <span class="caret">C_Tutorial</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-23-little-endian.html">Little-Endian과 포인터</a>
+        </li>
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-23-pointer.html">포인터, 더 엄밀한 포인터</a>
+        </li>
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-24-array.html">배열, 더 엄밀한 배열</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">C#_Unity</span>
+  <ul class="nested">
+    <li>
+      <span class="caret">NetFramework</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C%23_Unity/NetFramework/2022-02-06-accessviolationexception.html">Handling AccessViolationException</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span class="caret">Unity</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C%23_Unity/Unity/2022-03-01-ellipse-in-tilemap.html">Unity Tilemap에서 C#을 이용해 타원그리기</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">Hacking</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/00_define_hack.html">00: 해커와 해킹</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/01_think_as_hacker.html">01: 해커다운 생각</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/02_how_to_find_vulnerabilities.html">02: 어떻게 취약점을 찾는가</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/02E_how_to_find_vulnerability.html">02: 어떻게 취약점을 찾는가: 과제</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/03_what_is_digital_forensic.html">03: 디지털 포렌식?</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/04_mobile_virus_analysis.html">04: 모바일 악성코드 분석</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/05_bug_hunting.html">05: 버그 헌팅</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/06_law_for_hacker.html">06: 해킹과 법률</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/07_file_recovering_deleting.html">07: FS, 파일 복구 및 삭제 원리</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/08_financial_security.html">08: 금융 보안</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/09_development_model.html">09: 개발 모델, 개발 방법론</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/10_cryptology.html">10: 기초 암호학</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/11_hardware_security.html">11: 하드웨어 보안</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/12_pentesting.html">12: 모의해킹</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
+</li>
+
+    </ul>
+</nav>
+
+<header id="article-header">
+    <h1>&#xBC30;&#xC5F4;, &#xB354; &#xC5C4;&#xBC00;&#xD55C; &#xBC30;&#xC5F4;</h1>
+    <ul id="date-log">
+                    <li>Created 10/24/2023 12:00:00&#x202F;AM</li>
+    </ul>
+</header>
+
+<main id="article-main" class="markdown-body">
+<pre><code class="language-c">int a[10];
+</code></pre>
+<p>위와 같은 변수를 보았을때, 우리는 왜 이 변수를 배열이라고 생각하는 것일까?</p>
+<blockquote class="blockquote">
+<p>배열(array)은 같은 타입의 변수들로 이루어진 유한 집합으로 정의됩니다. 배열을 구성하는 각각의 값을 배열 요소(element)라고 하며, 배열에서의 위치를 가리키는 숫자는 인덱스(index)라고 합니다. ... <br/>- tcpschool.com</p>
+</blockquote>
+<p>보통 위와 같이 <code>int</code>형 16개로 이루어진 배열이 바로 a이라고 설명한다.
+우리는 이 문장을 보고, 평소에 해왔던 고수준 언어들의 특징들을 조합하여,
+<code>a</code>는 <code>int</code>형 10개로 이루어진 배열일 것이라고 추론한다.</p>
+<p>하지만, K&amp;R C에서는 다음과 같이 설명한다:</p>
+<blockquote class="blockquote">
+<p>defines an array a of size 10, that is, a block of 10 consecutive objects named a[0], a[1], ... , a[9]. <br/>- K&amp;R C, second edition (1988)</p>
+</blockquote>
+<p>즉, <code>a</code>가 10개의 원소를 담고있는 배열인것이 아니라, <strong><code>a</code>라는 이름의 변수가 메모리상에 연속하여 10개 존재</strong>하고, 이들을 구분짓기위해 index라고들 부르는것을 이용하여 <code>a[i]</code>라고 작성하기로 약속한 것이다.</p>
+<p>따라서, <code>a[0], a[1], ... , a[9]</code>각각은 메모리상에서 연속될 뿐, 근본적으로 모두 독립된 변수다.</p>
+<h2 id="section">배열과 포인터</h2>
+<p>혹자는 배열이 포인터라고 말한다.
+그렇게 생각하면 편하긴 한데, 엄밀히 따지면 다른점이 있다:</p>
+<ul>
+<li>배열의 붕괴(decay)</li>
+<li>sizeof</li>
+</ul>
+<h2 id="sizeof">sizeof</h2>
+<pre><code>int a[10];
+</code></pre>
+<p>배열 a는 포인터와 같이 연산할 수 있고, 역참조 될수도 있는데,
+무엇이 다르다는 걸까?</p>
+<p>이를 이해하기 위해 배열의 크기를 재보자.</p>
+<p><code>sizeof a</code>는 누구나 40이라고 추론할 수 있고,
+실제로 그렇다.</p>
+<p>하지만, a가 정녕 포인터였다면, 4(i386) 혹은 8(x86-64)이어야 맞지 않나?</p>
+<p>즉, <code>a[10]</code>은 a가 10개 존재한다는 정보를 보존하고 있다는 말이다.</p>
+<h2 id="decay">배열의 붕괴(decay)</h2>
+<p>이러한 정보는 손실될 수 있고, 이를 배열의 붕괴(decay)라고 부른다.</p>
+<pre><code>int v = *(a + 1);
+</code></pre>
+<p>배열에도 포인터와 같이 정수와의 연산이 가능하다. <code>a + 0</code>는 0번째 a, <code>a + 1</code>은 1번째 a와 같은 식이다.</p>
+<p>여기서 의문이 등장한다. <code>a + 1</code>은 <strong>왜</strong> 1번째 a의 주소를 반환할까?</p>
+<p>바로, a가 <code>int*</code>처럼 취급되었기 때문이다. 이는 배열이 배열로써의 정보를 잃어버리고, <code>int*</code>의 성질을 띄게되었음을 의미하며, 이를 배열의 붕괴(decay)라고 부르는 것이다.</p>
+<pre><code>&amp;a + 1
+</code></pre>
+<p>반대로, 위의 코드는 40바이트만큼 오프셋이 증가한다. <code>a[10]</code>의 주소를 가져옴으로써,
+배열의 정보가 보존되었기 때문이다.</p>
+
+</main>
+
+</body>
+
+</html> 

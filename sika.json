@@ -1,0 +1,17 @@
+﻿{
+    "Info": {
+        "RootUri": "https://blog.sharp0802.com/",
+        "PostDirectory": "post",
+        "LayoutDirectory": "layout",
+        "SiteDirectory": "docs"
+    },
+    "Profile": {
+        "UserName": "Sharp0802",
+        "ProfileImage": "https://avatars.githubusercontent.com/u/64760536?v=4"
+    },
+    "Contacts": {
+        "GitHub": "https://github.com/sharp0802",
+        "Email": "syw0802@proton.me",
+        "Misc": []
+    }
+}

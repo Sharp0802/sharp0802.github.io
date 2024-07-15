@@ -1,0 +1,366 @@
+<!--
+Copyright (C) 2023  Yeong-won Seo
+
+SIKA is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+SIKA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="Hacking"/>
+    <title>08: &#xAE08;&#xC735; &#xBCF4;&#xC548;</title>
+    <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
+    <link rel="defer" href="https://blog.sharp0802.com/style/gfm-dark.css"/>
+    <link rel="defer" href="https://blog.sharp0802.com/style/post.css"/>
+    <link rel="defer" href="https://blog.sharp0802.com/style/hl-github-dark.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+    <script src="https://blog.sharp0802.com/script/highlight.min.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/defer-css.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/treeview.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/search.js" defer></script>
+</head>
+
+<body>
+
+<nav class="sidenav">
+    <!-- PROFILE -->
+    <section id="profile">
+        <img alt="" id="profile-img" src="https://avatars.githubusercontent.com/u/64760536?v=4"/>
+        <h3>Sharp0802</h3>
+        <ul id="contacts">
+                <li class="github-logo"><a href="https://github.com/sharp0802">GitHub Account</a></li>
+                <li class="email-logo"><a href="mailto:syw0802@proton.me">Email</a></li>
+        </ul>
+    </section>
+
+    <br/>
+
+    <!-- SEARCH FORM -->
+    <form role="search" id="search-form">
+        <svg viewBox="0 0 1024 1024">
+            <path d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"/>
+        </svg>
+        <input id="search-box" type="text" placeholder="Search"/>
+    </form>
+
+    <!-- TREE VIEW -->
+    <ul id="tree-view">
+        <li>
+  <span class="caret">C_C++</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2022-02-06-svml-in-clang-cl.html">Clang-cl에서 SVML 사용하기</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2023-02-23-about-nostdlib-nostartfiles.html">--nostdlib과 --nostartfiles에 대하여</a>
+    </li>
+    <li>
+      <span class="caret">C_Tutorial</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-23-little-endian.html">Little-Endian과 포인터</a>
+        </li>
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-23-pointer.html">포인터, 더 엄밀한 포인터</a>
+        </li>
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-24-array.html">배열, 더 엄밀한 배열</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">C#_Unity</span>
+  <ul class="nested">
+    <li>
+      <span class="caret">NetFramework</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C%23_Unity/NetFramework/2022-02-06-accessviolationexception.html">Handling AccessViolationException</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span class="caret">Unity</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C%23_Unity/Unity/2022-03-01-ellipse-in-tilemap.html">Unity Tilemap에서 C#을 이용해 타원그리기</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">Hacking</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/00_define_hack.html">00: 해커와 해킹</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/01_think_as_hacker.html">01: 해커다운 생각</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/02_how_to_find_vulnerabilities.html">02: 어떻게 취약점을 찾는가</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/02E_how_to_find_vulnerability.html">02: 어떻게 취약점을 찾는가: 과제</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/03_what_is_digital_forensic.html">03: 디지털 포렌식?</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/04_mobile_virus_analysis.html">04: 모바일 악성코드 분석</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/05_bug_hunting.html">05: 버그 헌팅</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/06_law_for_hacker.html">06: 해킹과 법률</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/07_file_recovering_deleting.html">07: FS, 파일 복구 및 삭제 원리</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/08_financial_security.html">08: 금융 보안</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/09_development_model.html">09: 개발 모델, 개발 방법론</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/10_cryptology.html">10: 기초 암호학</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/11_hardware_security.html">11: 하드웨어 보안</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/12_pentesting.html">12: 모의해킹</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
+</li>
+
+    </ul>
+</nav>
+
+<header id="article-header">
+    <h1>08: &#xAE08;&#xC735; &#xBCF4;&#xC548;</h1>
+    <ul id="date-log">
+                    <li>Created 7/5/2023 12:00:00&#x202F;AM</li>
+    </ul>
+</header>
+
+<main id="article-main" class="markdown-body">
+<h2 id="section">금융 보안</h2>
+<h3 id="section-1">업계분위기</h3>
+<ul>
+<li>느리다.
+<ul>
+<li>게임 &amp; 인터넷 사업 군 대비 최신기술 적용 느림</li>
+</ul>
+</li>
+<li>앞장서서 변화하지 않음</li>
+<li>잘 되어 있음</li>
+<li>하라면 한다, 서비스보다는 보안이 우선</li>
+<li>모든 일에는 근거가 필요</li>
+</ul>
+<h3 id="isac">금융 ISAC</h3>
+<ul>
+<li>ISAC: 정보 공유 분석 센터</li>
+<li>해킹이나 사이버 테러 취약점과 침해요인, 대응 방안에 관한 정보를 가입 기관에 제공하고 침해사고가 발생했을 때 실시간으로 정보와 분석업무를 처리하는 업무를 수행</li>
+</ul>
+<div class="mermaid">C4Context
+    System(ISAC_CA, "금융위원회")
+    Boundary(b0, "금융보안원") {
+        System(KFTCI, "금융결재원")
+        System(koscom, "koscom")
+        System(FSRI, "금융보안연구원")
+    }
+    Rel(ISAC_CA, KFTCI, "")
+    Rel(ISAC_CA, koscom, "")
+    Rel(ISAC_CA, FSRI, "")
+</div>
+<p>본래 금융결재원 은행 ISAC, koscom 증권 ISAC, 금융보안연구원으로 나뉘어져 있었으나,
+금융위원회 주도로 2015년 4월 10일에 금융보안원이라는 이름으로 통합되어 출범하였다.</p>
+<h3 id="section-2">금융보안원</h3>
+<ul>
+<li>취약점 분석평가</li>
+<li>최신보안 정보제공</li>
+<li>전문 보안교육</li>
+<li>통합 보안관제</li>
+<li>RegTech(Regulatory Technology): 은행의 리스크 관리 기능을 보다 효율적으로 향상시켜주는 것</li>
+</ul>
+<h2 id="section-3">보안 컨설팅</h2>
+<p>보안컨설팅: 정보통신시설 및 시스템을 안전하게 유지하기 위하여 보호대책 수립, 위험요인 평가, 모의해킹, 마스터플랜 수립 등을 수행하는 일련의 과정을 말한다</p>
+<h3 id="what">What?</h3>
+<ul>
+<li>취약성 진단 컨설팅
+<ul>
+<li>시스템/네트워크 취약성 테스트</li>
+<li>취약성 결과 보고 및 대안 제시</li>
+</ul>
+</li>
+<li>기본 보안 컨설팅
+<ul>
+<li>보안 체크리스트 이용-기본적인 정보보호수준점검</li>
+<li>보안절차 및 대책 권고 (취약성 진단 컨설팅 포함)</li>
+</ul>
+</li>
+<li>주요 정보통신 기반시설 정보보호 컨설팅
+<ul>
+<li>금융감족위원회/정보통신부 취약점 준석 평가 기준을 반영한 보호 대책</li>
+</ul>
+</li>
+<li>정보보호 안전진단 심사</li>
+<li>종합 보안 컨설팅</li>
+<li>개인정보 보호 컨설팅</li>
+<li>시스템개발단계보안컨설팅</li>
+<li>인증체계 유지 시스템</li>
+<li>보안 감사</li>
+</ul>
+<p>직업으로는...</p>
+<ul>
+<li>기업 정보보안 담당자</li>
+<li>정보보호 컨설턴트</li>
+<li>각종 보안 솔루션 개방자</li>
+<li>각종 보안 솔루션 운영자, 기술 영업</li>
+<li>리스크 관리 담당자</li>
+<li>전산 감사 담당자</li>
+<li>개인정보보호 담당자</li>
+<li>침해사고 분석 &amp; 대응</li>
+<li>취약점 분석가</li>
+<li>보안 관제</li>
+</ul>
+<h3 id="why">Why?</h3>
+<ul>
+<li>전자금융거래법</li>
+<li>전자서명법</li>
+<li>전자거래기본법</li>
+<li>자본시장과 금융투자업에 관한 법률</li>
+<li>주식회사의 외부감사에 관한 법률</li>
+<li>정보통신망 이용촉진 및 정보보호에 관한 법률</li>
+<li>신용정보의 이용 및 보호에 관한 법률</li>
+<li>금융실명제 및 비밀보장에 관한 법률</li>
+<li>전자상거래 등에서늬 소비자 보호에 관한 법률</li>
+<li>장애인 차별 금지 및 권리 규제에 관한 법률</li>
+<li>전자정부법</li>
+<li>정보시스템의 효율적인 도입 및 윤영등에 대한 법률</li>
+<li>기타 등등...</li>
+</ul>
+<h3 id="if-not">If not?</h3>
+<ul>
+<li>금융기업들이 보안컨설팅을 받지 않는 경우, 전자금융거래법에 따라 보안컨설팅을 받지 않았다는 사실을 홈페이지에 고지해야하며, 과태료가 부과된다</li>
+<li>또한, 정보기술부문 인력 및 정보보호인력을 총 임직원 수에 대해 일정 비율 이상 고용해야한다</li>
+</ul>
+<p>(단, 취약점 분석 평가는 <strong>총자산이 2조원 이상</strong>이고, 상시 종업원 수가 300명 이상인 금융회사들만 실시한다.)</p>
+<h2 id="section-4">정보보호 인프라</h2>
+<ol>
+<li>이용자</li>
+<li>금융 ISAC 보안관제 영역
+<ol type="a">
+<li>통신장비</li>
+<li>침입감지 시스템</li>
+</ol>
+</li>
+<li>금융 회사 자체 보안 관제 영역
+<ol type="a">
+<li>DMZ
+<ol type="I">
+<li>1차 침입차단 시스템</li>
+<li>인터넷 뱅킹 웹 서버</li>
+<li>2차 칩입차단 시스템</li>
+</ol>
+</li>
+<li>내부망
+<ol type="I">
+<li>업무용 AP 서버</li>
+<li>고객 DB 서버</li>
+<li>계정계 시스템</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="ddos">DDos 차단 시스템</h3>
+<ol>
+<li>침입방지 (IPS)</li>
+<li>방화벽
+<ul>
+<li>침입방지(IDS)
+<ul>
+<li>내부네트워크</li>
+</ul>
+</li>
+<li>DMZ
+<ul>
+<li>웹방화벽(WAF) → Web서버</li>
+<li>스팸차단 → Mail서버</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="ddos-1">DDos차단 시스템</h3>
+<ol>
+<li>자원(PPS) 소모성 공격: Syn Flooding, TCP Connection Flooding, TCP out-of-state Packet Flooding Attack</li>
+<li>웹 서비스 지연 공격: 동일 URL 반복 접속, 로그인 반복 시도</li>
+<li>대용량 트레픽 전송 공격: UDP/ICMP Flooding Attack</li>
+</ol>
+<h3 id="waf">웹방화벽(WAF)</h3>
+<ol>
+<li>웹셸
+<ul>
+<li>공격자가 원격에서 대상 웹서버에 명령을 수행할 수 있고록 작성한 웹 스크립트 파일(.asp, .jsp, .php)</li>
+</ul>
+</li>
+<li>위험성
+<ul>
+<li>루트 권한 탈취</li>
+<li>서버 내 자료 유출</li>
+<li>백도어 설치</li>
+</ul>
+</li>
+</ol>
+<h3 id="section-5">스팸메일 탐지 시스템</h3>
+<ol>
+<li>메일서버에서 발송</li>
+<li>DLP(mta1,mta2)로 forwarding(정보유출 확인)</li>
+<li>최종 목적지 메일 주소로 발송</li>
+</ol>
+<h3 id="section-6">허니팟</h3>
+<p><em>Honey Pot</em>: 비정상적인 접근을 탐지하기 위해 의도적으로 설치해 둥 시스템, 네트워크 상에 특정 서버를 연결해 두고 해당 서버에 중요한 정보가 있는 것처럼 꾸며두면 공격자가 해당 서버를 크래킹하기 위해 시도하는 것을 탐지하기 위함</p>
+<h3 id="section-7">무선 보안</h3>
+<ol>
+<li>무선구간 서비스 거부 공격</li>
+<li>모바일 악성 트레픽 통로</li>
+<li>비인가 불법 AP 접속 유도</li>
+<li>정보 유출</li>
+</ol>
+<p>따라서, 네트워크 기반시설에서는 무선 신호가 허용되지 않는다.</p>
+<h3 id="section-8">트래픽 분석기</h3>
+<p>SNMP 성능 모니터링 분석
+네트워크 상황 분석 FetFlow
+네트워크 흐름 분석
+네트워크 데이터 접근</p>
+
+</main>
+
+</body>
+
+</html> 

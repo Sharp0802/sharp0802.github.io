@@ -1,0 +1,246 @@
+<!--
+Copyright (C) 2023  Yeong-won Seo
+
+SIKA is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+SIKA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with SIKA.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="Hacking,Development"/>
+    <title>07: FS, &#xD30C;&#xC77C; &#xBCF5;&#xAD6C; &#xBC0F; &#xC0AD;&#xC81C; &#xC6D0;&#xB9AC;</title>
+    <link rel="defer" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" />
+    <link rel="defer" href="https://blog.sharp0802.com/style/gfm-dark.css"/>
+    <link rel="defer" href="https://blog.sharp0802.com/style/post.css"/>
+    <link rel="defer" href="https://blog.sharp0802.com/style/hl-github-dark.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+    <script src="https://blog.sharp0802.com/script/highlight.min.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/defer-css.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/treeview.js" defer></script>
+    <script src="https://blog.sharp0802.com/script/search.js" defer></script>
+</head>
+
+<body>
+
+<nav class="sidenav">
+    <!-- PROFILE -->
+    <section id="profile">
+        <img alt="" id="profile-img" src="https://avatars.githubusercontent.com/u/64760536?v=4"/>
+        <h3>Sharp0802</h3>
+        <ul id="contacts">
+                <li class="github-logo"><a href="https://github.com/sharp0802">GitHub Account</a></li>
+                <li class="email-logo"><a href="mailto:syw0802@proton.me">Email</a></li>
+        </ul>
+    </section>
+
+    <br/>
+
+    <!-- SEARCH FORM -->
+    <form role="search" id="search-form">
+        <svg viewBox="0 0 1024 1024">
+            <path d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"/>
+        </svg>
+        <input id="search-box" type="text" placeholder="Search"/>
+    </form>
+
+    <!-- TREE VIEW -->
+    <ul id="tree-view">
+        <li>
+  <span class="caret">C_C++</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2022-02-06-svml-in-clang-cl.html">Clang-cl에서 SVML 사용하기</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2023-02-23-about-nostdlib-nostartfiles.html">--nostdlib과 --nostartfiles에 대하여</a>
+    </li>
+    <li>
+      <span class="caret">C_Tutorial</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-23-little-endian.html">Little-Endian과 포인터</a>
+        </li>
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-23-pointer.html">포인터, 더 엄밀한 포인터</a>
+        </li>
+        <li>
+          <a href="https://blog.sharp0802.com/C_C%2b%2b/C_Tutorial/2023-10-24-array.html">배열, 더 엄밀한 배열</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">C#_Unity</span>
+  <ul class="nested">
+    <li>
+      <span class="caret">NetFramework</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C%23_Unity/NetFramework/2022-02-06-accessviolationexception.html">Handling AccessViolationException</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span class="caret">Unity</span>
+      <ul class="nested">
+        <li>
+          <a href="https://blog.sharp0802.com/C%23_Unity/Unity/2022-03-01-ellipse-in-tilemap.html">Unity Tilemap에서 C#을 이용해 타원그리기</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">Hacking</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/00_define_hack.html">00: 해커와 해킹</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/01_think_as_hacker.html">01: 해커다운 생각</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/02_how_to_find_vulnerabilities.html">02: 어떻게 취약점을 찾는가</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/02E_how_to_find_vulnerability.html">02: 어떻게 취약점을 찾는가: 과제</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/03_what_is_digital_forensic.html">03: 디지털 포렌식?</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/04_mobile_virus_analysis.html">04: 모바일 악성코드 분석</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/05_bug_hunting.html">05: 버그 헌팅</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/06_law_for_hacker.html">06: 해킹과 법률</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/07_file_recovering_deleting.html">07: FS, 파일 복구 및 삭제 원리</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/08_financial_security.html">08: 금융 보안</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/09_development_model.html">09: 개발 모델, 개발 방법론</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/10_cryptology.html">10: 기초 암호학</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/11_hardware_security.html">11: 하드웨어 보안</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/Hacking/12_pentesting.html">12: 모의해킹</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
+</li>
+
+    </ul>
+</nav>
+
+<header id="article-header">
+    <h1>07: FS, &#xD30C;&#xC77C; &#xBCF5;&#xAD6C; &#xBC0F; &#xC0AD;&#xC81C; &#xC6D0;&#xB9AC;</h1>
+    <ul id="date-log">
+                    <li>Created 7/4/2023 12:00:00&#x202F;AM</li>
+    </ul>
+</header>
+
+<main id="article-main" class="markdown-body">
+<h2 id="fs-file-system">FS : File System</h2>
+<p><em>HDD sector</em>: 원래 512B였다가, 2011년부터 4096B가 표준으로 제정되었다.</p>
+<p><em>LBA (Logical Block Addressing)</em></p>
+<ul>
+<li>LBA22: 22bit를 block addressing에 사용. 2^22까지 지정 가능.</li>
+<li>LBA28 (ATA-1, 1994): 2^28까지 지정 가능.</li>
+<li>LBA48 (ATA-6, 2003): 2^48까지 지정 가능.</li>
+</ul>
+<h3 id="section">파일시스템의 주요 책임</h3>
+<ul>
+<li>저장 장치에서 파일을 어떻게 읽을것인가</li>
+<li>저장 장치에서 파일을 어떻게 쓸 것인가</li>
+<li>저장 장치에서 파일을 어떻게 변화시킬 것인가</li>
+</ul>
+<h3 id="section-1">파일 생성 과정</h3>
+<ol>
+<li>Metadata를 하나 할당 받는다</li>
+<li>파일의 내용을 저잘할 수 있는 Data Blocks를 할당받는다.</li>
+<li>해당 Data Blocks에 파일 데이터를 쓴다.</li>
+<li>Metadata를 업데이트한다.</li>
+<li>Metadata를 저장매체에 저장한다.</li>
+</ol>
+<p><em>저장되자 실패가 일어나면...?</em></p>
+<h3 id="section-2">파일 읽기 과정</h3>
+<ol>
+<li>해당 파일의 Metadata를 찾는다.</li>
+<li>Metadata에 파일이 저장된 Data Blocks의 정보를 가져온다.</li>
+<li>해당 Data Blocks의 내용을 읽어서 전달한다.</li>
+</ol>
+<h3 id="section-3">파일 삭제 과정</h3>
+<p>파일 삭제 중 모든 메타데이터를 지우진 않는다.
+따라서, 메타데이터 일부분(FAT에서는 지워진 파일의 시작위치나 사이즈가 남아있음)을 이용해 파일을 복구시킬 수 있다.</p>
+<h3 id="section-4">어떤 경우에 복구가 어려울까?</h3>
+<ul>
+<li>파일의 메타데이터를 아예 찾기 어려운 경우</li>
+<li>파일의 데이터가 일부 덮어씌워진 경우</li>
+<li>파일이 분할되어 저장된 경우</li>
+</ul>
+<h3 id="section-5">파일시스템을 이해해야 하는 이유</h3>
+<ul>
+<li>복구가 가능할지에 대한 예측이 가능</li>
+<li>정확한 복구를 위해선 파일시스템을 이해해야 정확한 복구가 가능</li>
+</ul>
+<h3 id="carving">Carving</h3>
+<ul>
+<li>전체 디스크를 블록 별로 분석하여 데이터를 복구하는 방법</li>
+<li>파일 시스템을 몰라도 꽤 많은 데이터를 찾을 수 있음</li>
+<li>한계가 명확함
+<ul>
+<li>메타데이터가 없을 때 해당 파일의 크기를 어떻게 알 수 있을까?</li>
+<li>파일 포맷을 잘 이해해야 함.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ssd">SSD 특성</h3>
+<ul>
+<li>읽기는 페이지 단위</li>
+<li>쓰기는 페이지 단위</li>
+<li>삭제는 블록 단위</li>
+</ul>
+<h3 id="section-6">결론</h3>
+<ul>
+<li>파일의 삭제는 메타데이터만 지움</li>
+<li>파일의 복구는 실제로 데이터를 지우지 않기 때문에 가능</li>
+<li>완전 삭제는 반대로 데이터를 명시적으로 지움</li>
+<li>SSD는 복구가 더 어렵다
+<ul>
+<li>FTL은 각 SSD 업체마다 공개되지 않음</li>
+</ul>
+</li>
+</ul>
+
+</main>
+
+</body>
+
+</html> 
