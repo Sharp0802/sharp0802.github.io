@@ -3,15 +3,21 @@
         "RootUri": "https://blog.sharp0802.com/",
         "PostDirectory": "post",
         "LayoutDirectory": "layout",
-        "SiteDirectory": "docs"
+        "SiteDirectory": "site"
     },
     "Profile": {
         "UserName": "Sharp0802",
-        "ProfileImage": "https://avatars.githubusercontent.com/u/64760536?v=4"
+        "ProfileImage": "https://github.com/Sharp0802.png",
+        "Bio": "Game · System developer / C · C++ · C# / LLVM · OpenGL / A high-school student 🇰🇷"
     },
     "Contacts": {
-        "GitHub": "https://github.com/sharp0802",
+        "GitHub": "https://github.com/Sharp0802",
         "Email": "syw0802@proton.me",
-        "Misc": []
+        "Misc": [
+            {
+                "HRef": "https://www.linkedin.com/in/%EC%98%81%EC%9B%90-%EC%84%9C-aa289627a/",
+                "Name": "in/\uC601\uC6D0-\uC11C-aa289627a"
+            }
+        ]
     }
 }
