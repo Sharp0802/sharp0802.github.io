@@ -1,7 +1,7 @@
 ---
 LCID: en-us
 Layout: default
-Title: "`GCHandle.AddrOfPinnedObject()` for strings and arrays"
+Title: "'GCHandle.AddrOfPinnedObject()' for strings and arrays"
 Timestamps:
 - 2024-09-24
 Topic: [ "C#", ".Net", "GCHandle", "AddrOfPinnedObject", "GCHandle.AddrOfPinnedObject", "string", "System.String", "array" ]
