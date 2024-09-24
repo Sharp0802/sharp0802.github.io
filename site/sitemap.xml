@@ -1,79 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://blog.sharp0802.com/Hacking/12_pentesting.md</loc>
-    <lastmod>2023-07-05</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/05_bug_hunting.md</loc>
-    <lastmod>2023-07-03</lastmod>
-  </url>
-  <url>
     <loc>https://blog.sharp0802.com/index.md</loc>
     <lastmod>2023-05-01</lastmod>
   </url>
   <url>
-    <loc>https://blog.sharp0802.com/Hacking/08_financial_security.md</loc>
-    <lastmod>2023-07-05</lastmod>
+    <loc>https://blog.sharp0802.com/C_C++/2023-10-23-little-endian.md</loc>
+    <lastmod>2023-10-23</lastmod>
   </url>
   <url>
-    <loc>https://blog.sharp0802.com/Hacking/09_development_model.md</loc>
-    <lastmod>2023-07-05</lastmod>
+    <loc>https://blog.sharp0802.com/.NET Framework/2022-02-06-accessviolationexception.md</loc>
+    <lastmod>2023-05-03</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.sharp0802.com/C_C++/2023-10-24-array.md</loc>
+    <lastmod>2023-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.sharp0802.com/.NET Core/2024-09-24-gchandle-for-strings-arrays.md</loc>
+    <lastmod>2024-09-24</lastmod>
   </url>
   <url>
     <loc>https://blog.sharp0802.com/C_C++/2023-02-23-about-nostdlib-nostartfiles.md</loc>
     <lastmod>2023-05-01</lastmod>
   </url>
   <url>
-    <loc>https://blog.sharp0802.com/Hacking/11_hardware_security.md</loc>
-    <lastmod>2023-07-05</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/C_C++/C_Tutorial/2023-10-24-array.md</loc>
-    <lastmod>2023-10-24</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/C#_Unity/NetFramework/2022-02-06-accessviolationexception.md</loc>
-    <lastmod>2023-05-03</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/C#_Unity/Unity/2022-03-01-ellipse-in-tilemap.md</loc>
+    <loc>https://blog.sharp0802.com/C_C++/2022-02-06-svml-in-clang-cl.md</loc>
     <lastmod>2023-05-01</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/04_mobile_virus_analysis.md</loc>
-    <lastmod>2023-07-02</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/10_cryptology.md</loc>
-    <lastmod>2023-07-05</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/02E_how_to_find_vulnerability.md</loc>
-    <lastmod>2023-07-01</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/C_C++/C_Tutorial/2023-10-23-little-endian.md</loc>
-    <lastmod>2023-10-23</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/03_what_is_digital_forensic.md</loc>
-    <lastmod>2023-07-04</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/01_think_as_hacker.md</loc>
-    <lastmod>2023-07-01</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/C_C++/C_Tutorial/2023-10-23-pointer.md</loc>
-    <lastmod>2023-10-23</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/07_file_recovering_deleting.md</loc>
-    <lastmod>2023-07-04</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.sharp0802.com/Hacking/00_define_hack.md</loc>
-    <lastmod>2023-07-01</lastmod>
   </url>
 </urlset>

@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="keywords" content=""/>
+  <meta name="keywords" content="C#,.Net,Unity,Math"/>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/hl-github.min.css"/>
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/material.css"/>
 
-  <title>404!</title>
+  <title>Unity Tilemap&#xC5D0;&#xC11C; C#&#xC744; &#xC774;&#xC6A9;&#xD574; &#xD0C0;&#xC6D0;&#xADF8;&#xB9AC;&#xAE30;</title>
 </head>
 
 <body>
@@ -146,90 +146,88 @@
 <article>
   <main>
     <header class="card">
-      <h1>404!</h1>
+      <h1>Unity Tilemap&#xC5D0;&#xC11C; C#&#xC744; &#xC774;&#xC6A9;&#xD574; &#xD0C0;&#xC6D0;&#xADF8;&#xB9AC;&#xAE30;</h1>
       <h3>Last edit on 2023-05-01</h3>
     </header>
     <div class="content">
       <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
+        <h3 id="t">각도 t에 따른 타원 위의 점</h3>
+<p>위키피디아에 따르면, 각도 t에서 타원 위의 점 $(X(t), Y(t))$는 다음과 같다.</p>
+<div class="math">
+\[
+\begin{aligned}
+X(t) &amp;= X_{c} + a \times \cos{t} \times \cos{\phi} - b \times \sin{t} \times \sin{\phi} \\
+Y(t) &amp;= Y_{c} + a \times \cos{t} \times \sin{\phi} - b \times \sin{t} \times \cos{\phi}
+\end{aligned}
+\]</div>
+<p>$(X_, Y_)$는 타원의 중점, a는 장축의 절반, b는 단축의 절반의 길이값이다.</p>
+<p>$\phi$는 x축을 기준으로 타원이 y축 방향으로 기울어진 방향을 의미한다.</p>
+<p>필요한건, 기울어진 타원이 아니므로, 아래의 방정식으로 간단히 만든다.</p>
+<div class="math">
+\[
+\begin{aligned}
+X(t) &amp;= X_{c} + a \cos{t} \\
+Y(t) &amp;= Y_{c} + b \sin{t}
+\end{aligned}
+\]</div>
+<h3 id="x">x에 따른 타원 위의 점</h3>
+<p>하지만, Tilemap에 타원을 그리기 위해선, 각도가 아니라, x에 따른 y값을 알아야 한다.</p>
+<p>$(X_, Y_) = (0, 0)$이고, 각도 t에서 양의 x값을 $x_$라고 가정하자.</p>
+<p t="" a="">이때, $x_ = a \cos ∴ t = \arccos{\frac{x_}}$다.</p>
+<p>이를 Y(t)에 대입하여 x값에 따른 y값을 반환하는 f(x)를 구하면 다음과 같다.</p>
+<div class="math">
+\[
+\begin{aligned}
+\forall x_{p} \in \{t | t \in \mathbb{Q}, t \geq 0\}, f(x_{p}) &amp;= Y(\arccos{\frac{x_{p}}{a}}) \\
+                                                               &amp;= b (arccos \circ sin)(\frac{x_{p}}{a}) \\
+                                \forall x \in \mathbb{Q}, f(x) &amp;= \pm b (arccos \circ sin)(\frac{x}{a}) \\
+                                                               &amp;= \pm b \sqrt{\frac{a^2 - x^2}{a^2}}
+\end{aligned}
+\]</div>
+<h3 id="section">구현</h3>
+<p>중점 (0,0)을 가지며 너비가 <code>float w</code>, 높이가 <code>float h</code>인 타원에 대하여,
+x값이 <code>float x</code>일때, y값 두개를 Vector2로 반환한다.</p>
+<pre><code class="language-c#">public static Vector2 GetYOnEllipseByX(float x, float w, float h)
+{
+    var a = MathF.Max(w, h);
+    var b = MathF.Min(w, h);
 
-      </div>
-    </div>
-  </main>
-</article>
+    var y = b * MathF.Sqrt((a * a - x * x) / (a * a));
 
+    return new Vector2(y, -y);
+}
+</code></pre>
+<p>보통 Tilemap은 int,int의 좌표를 갖는것이 일반적이므로</p>
+<p><code>MathF.Round(float) : float</code>와 형 변환 (e.g. <code>(int) MathF.Round(a)</code>) 혹은,
+<code>Mathf.RoundToInt(float) : int</code>를 고려하자.</p>
+<p>Unity 엔진의 Tilemap을 이용한다면, 구현은 다음과 같을것이다</p>
+<pre><code class="language-c#">public static Vector2Int GetYOnEllipseByX(int x, float w, float h)
+{
+    var a = Mathf.Max(w, h);
+    var b = Mathf.Min(w, h);
 
-<script>
-  'use strict';
+    var y = Mathf.RoundToInt(b * Mathf.Sqrt((a * a - x * x) / (a * a)));
 
-  // side view
-  const menu = document.getElementById("menu");
-  const side = document.querySelector("nav.side");
-  menu.addEventListener("click", _ => {
-    if (side.classList.contains("vis")) {
-      menu.textContent = "menu";
-      side.classList.remove("vis");
-    } else {
-      menu.textContent = "menu_open";
-      side.classList.add("vis");
-    }
-  });
+    return new Vector2Int(y, -y);
+}
+</code></pre>
+<p>중점이 (p,q)인 타원을 원한다면,</p>
+<p>위 함수는 중점이 (0,0)이므로,
+x - p를 <code>float x</code>로 정하고,
+반환된 y에 각각 q를 더하면 될것이다</p>
+<p>위 사항을 고려하는 구현은 다음과 같다.</p>
+<pre><code class="language-c#">public static Vector2Int GetYOnEllipseByXWithOffset(Vector2Int offset, int x, float w, float h)
+{
+    x -= offset.x;
 
-  // tree view
-  let elements = document.getElementsByClassName("caret");
-  for (let i = 0; i < elements.length; ++i) {
-    let element = elements[i];
-    element.addEventListener("click", () => {
-      element.parentElement.querySelector(".nested").classList.toggle("active");
-      element.classList.toggle("caret-down");
-    })
-  }
-</script>
+    var a = Mathf.Max(w, h);
+    var b = Mathf.Min(w, h);
 
-</body>
+    var y = Mathf.RoundToInt(b * Mathf.Sqrt((a * a - x * x) / (a * a)));
 
-</html>m/Hacking/08_financial_security.html">08: 금융 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/09_development_model.html">09: 개발 모델, 개발 방법론</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/10_cryptology.html">10: 기초 암호학</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/11_hardware_security.html">11: 하드웨어 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/12_pentesting.html">12: 모의해킹</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
-</li>
-
-      </ul>
-    </div>
-
-    <div id="footer">
-      <span>
-        Made with <a href="https://github.com/Sharp0802/sika">SIKA</a>
-      </span>
-    </div>
-  </div>
-</nav>
-
-<article>
-  <main>
-    <header class="card">
-      <h1>404!</h1>
-      <h3>Last edit on 2023-05-01</h3>
-    </header>
-    <div class="content">
-      <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
+    return new Vector2Int(y, -y) + Vector2Int.one * offset.y;
+}
+</code></pre>
 
       </div>
     </div>

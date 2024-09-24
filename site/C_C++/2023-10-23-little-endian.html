@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="keywords" content=""/>
+  <meta name="keywords" content="C,C&#x2B;&#x2B;,Concepts,Memory,Pointer"/>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/hl-github.min.css"/>
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/material.css"/>
 
-  <title>404!</title>
+  <title>Little-Endian&#xACFC; &#xD3EC;&#xC778;&#xD130;</title>
 </head>
 
 <body>
@@ -146,90 +146,37 @@
 <article>
   <main>
     <header class="card">
-      <h1>404!</h1>
-      <h3>Last edit on 2023-05-01</h3>
+      <h1>Little-Endian&#xACFC; &#xD3EC;&#xC778;&#xD130;</h1>
+      <h3>Last edit on 2023-10-23</h3>
     </header>
     <div class="content">
       <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
-
-      </div>
-    </div>
-  </main>
-</article>
-
-
-<script>
-  'use strict';
-
-  // side view
-  const menu = document.getElementById("menu");
-  const side = document.querySelector("nav.side");
-  menu.addEventListener("click", _ => {
-    if (side.classList.contains("vis")) {
-      menu.textContent = "menu";
-      side.classList.remove("vis");
-    } else {
-      menu.textContent = "menu_open";
-      side.classList.add("vis");
-    }
-  });
-
-  // tree view
-  let elements = document.getElementsByClassName("caret");
-  for (let i = 0; i < elements.length; ++i) {
-    let element = elements[i];
-    element.addEventListener("click", () => {
-      element.parentElement.querySelector(".nested").classList.toggle("active");
-      element.classList.toggle("caret-down");
-    })
-  }
-</script>
-
-</body>
-
-</html>m/Hacking/08_financial_security.html">08: 금융 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/09_development_model.html">09: 개발 모델, 개발 방법론</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/10_cryptology.html">10: 기초 암호학</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/11_hardware_security.html">11: 하드웨어 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/12_pentesting.html">12: 모의해킹</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
-</li>
-
-      </ul>
-    </div>
-
-    <div id="footer">
-      <span>
-        Made with <a href="https://github.com/Sharp0802/sika">SIKA</a>
-      </span>
-    </div>
-  </div>
-</nav>
-
-<article>
-  <main>
-    <header class="card">
-      <h1>404!</h1>
-      <h3>Last edit on 2023-05-01</h3>
-    </header>
-    <div class="content">
-      <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
+        <p>포인터는 항상 데이터의 첫 바이트를 가리킨다.
+문자열을 생각해보면 꽤 합당하고,
+암묵적으로 받아들이고 있었을 말이다.</p>
+<pre><code>| 00 | 11 | 22 | 33 |
+</code></pre>
+<p>4바이트 정수형 변수 A(0x00112233)가 메모리상에 다음과 같이 배치되었을때,
+A를 가리키는 포인터 pA는 char*로 형변환 하였을때에,
+역참조한다면 00이 출력되어야 할것만 같다.</p>
+<p>하지만, 33이 출력된다. (대부분의 x86기반 컴퓨터에서)</p>
+<p>4바이트 정수 0x00112233은 메모리 주소상에 다음과 같이 배치되기 때문이다.</p>
+<pre><code>| 33 | 22 | 11 | 00 |
+</code></pre>
+<p>이렇게 바이트의 순서가 역순 꼴을 띄고 있는 것을 Little-Endian,
+그렇지 않은 것을 Big-Endian이라고 한다.</p>
+<h2 id="section">왜?</h2>
+<p>본몬에서는 깊이 들어가지 않고,
+자료형과 주소에 관하여만 서술하겠다.</p>
+<p>int형 0x00112233을 char형으로 형변환하기로 하자.
+이때, truncation이 발생하여 0x33이 되는것이 바람직해보인다.</p>
+<p>이때, 효율적으로 형변환을 구현하기 위해,
+개발자들은 바이트열을 뒤집었다.
+33221100순으로 저장된다면,
+주소를 바꾸지 않아도 바로 형변환된 값을 얻을 수 있기 때문이다.</p>
+<h2 id="network-byte-order">Network-Byte-Order</h2>
+<p>이와 별개로, 네트워크에서는 모든 바이트를 순열(Big-Endian)로 저장하고,
+이를 Network-Byte-Order혹은 NBO라고 부른다.</p>
 
       </div>
     </div>

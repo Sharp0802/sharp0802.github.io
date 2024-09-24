@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="keywords" content=""/>
+  <meta name="keywords" content="C#,.Net,AccessViolationException,SEH"/>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/hl-github.min.css"/>
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/material.css"/>
 
-  <title>404!</title>
+  <title>Handling AccessViolationException</title>
 </head>
 
 <body>
@@ -146,90 +146,54 @@
 <article>
   <main>
     <header class="card">
-      <h1>404!</h1>
-      <h3>Last edit on 2023-05-01</h3>
+      <h1>Handling AccessViolationException</h1>
+      <h3>Last edit on 2023-05-03</h3>
     </header>
     <div class="content">
       <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
+        <h2 id="section">문제</h2>
+<p>문제가 생겼다</p>
+<p>무슨짓을 해도 System.AccessViolationException을 핸들링할 수가 없다</p>
+<p>답은 MS 공식 문서에 서술되어 있다</p>
+<blockquote class="blockquote">
+<p>Starting with .NET Framework 4,
+AccessViolationException exceptions thrown by the common language runtime are not handled by the catch statement
+in a structured exception handler if the exception occurs outside of the memory reserved by the common language runtime.</p>
+</blockquote>
+<p>net4.x부터 CLR에 의해 예약된 메모리 외부에서 오류가 발생하여, CLR에 의해 throw된 AccessViolationException은 구조적인 예외 처리기 문(catch)에서 처리되지 않는다</p>
+<h2 id="section-1">해결</h2>
+<p>물론, 해결법 또한 MS 공식 문서에 서술되어 있다</p>
+<blockquote class="blockquote">
+<p>To handle such an AccessViolationException exception,
+apply the HandleProcessCorruptedStateExceptionsAttribute attribute to the method in which the exception is thrown.</p>
+</blockquote>
+<p>간단히, HandleProcessCorruptedStateExceptionsAttribute를 메서드에 추가하도록 하자</p>
+<pre><code class="language-Csharp">// AccessViolationException을 throw하는 함수
+[method: DllExport(&quot;xxx.dll&quot;)]
+private static extern void ThrowAccessViolationException();
 
-      </div>
-    </div>
-  </main>
-</article>
-
-
-<script>
-  'use strict';
-
-  // side view
-  const menu = document.getElementById("menu");
-  const side = document.querySelector("nav.side");
-  menu.addEventListener("click", _ => {
-    if (side.classList.contains("vis")) {
-      menu.textContent = "menu";
-      side.classList.remove("vis");
-    } else {
-      menu.textContent = "menu_open";
-      side.classList.add("vis");
-    }
-  });
-
-  // tree view
-  let elements = document.getElementsByClassName("caret");
-  for (let i = 0; i < elements.length; ++i) {
-    let element = elements[i];
-    element.addEventListener("click", () => {
-      element.parentElement.querySelector(".nested").classList.toggle("active");
-      element.classList.toggle("caret-down");
-    })
-  }
-</script>
-
-</body>
-
-</html>m/Hacking/08_financial_security.html">08: 금융 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/09_development_model.html">09: 개발 모델, 개발 방법론</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/10_cryptology.html">10: 기초 암호학</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/11_hardware_security.html">11: 하드웨어 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/12_pentesting.html">12: 모의해킹</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
-</li>
-
-      </ul>
-    </div>
-
-    <div id="footer">
-      <span>
-        Made with <a href="https://github.com/Sharp0802/sika">SIKA</a>
-      </span>
-    </div>
-  </div>
-</nav>
-
-<article>
-  <main>
-    <header class="card">
-      <h1>404!</h1>
-      <h3>Last edit on 2023-05-01</h3>
-    </header>
-    <div class="content">
-      <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
+[method: HandleProcessCorruptedStateExceptions]
+private static void CatchAccessViolationException()
+{
+	try
+	{
+		ThrowAccessViolationException();
+	}
+	catch (AccessViolationException)
+	{
+		...
+	}
+}
+</code></pre>
+<p>혹은, 호환성을 위해 net3.x 이전의 동작으로 되돌리고 싶다면, App.config를 만들어보자</p>
+<p>configuration태그 안의 runtime태그 안에 legacyCorruptedStateExceptionsPolicy태그를 생성하고, enable속성을 true로 바꾸어주자</p>
+<p>App.config를 전에 건드린적이 없다면, 아래와 같은 모습이 되어야 한다</p>
+<pre><code class="language-xml">&lt;configuration&gt;
+	&lt;runtime&gt;
+		&lt;legacyCorruptedStateExceptionsPolicy enabled=&quot;true&quot;/&gt;
+	&lt;/runtime&gt;
+&lt;/configuration&gt;
+</code></pre>
 
       </div>
     </div>

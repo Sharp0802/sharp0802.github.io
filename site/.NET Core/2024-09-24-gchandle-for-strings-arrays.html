@@ -1,12 +1,12 @@
 
 
 <!DOCTYPE html>
-<html lang="ko-kr">
+<html lang="en-us">
 
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="keywords" content=""/>
+  <meta name="keywords" content="C#,.Net,GCHandle,AddrOfPinnedObject,GCHandle.AddrOfPinnedObject,string,System.String,array"/>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/hl-github.min.css"/>
   <link rel="stylesheet" href="https://blog.sharp0802.com/style/material.css"/>
 
-  <title>404!</title>
+  <title>`GCHandle.AddrOfPinnedObject()` for strings and arrays</title>
 </head>
 
 <body>
@@ -146,90 +146,88 @@
 <article>
   <main>
     <header class="card">
-      <h1>404!</h1>
-      <h3>Last edit on 2023-05-01</h3>
+      <h1>`GCHandle.AddrOfPinnedObject()` for strings and arrays</h1>
+      <h3>Last edit on 2024-09-24</h3>
     </header>
     <div class="content">
       <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
+        <p>For <code>System.String</code> and <code>System.Array</code>, <code>GCHandle.AddrOfPinnedObject()</code> returns address of its buffer.
+So, You don't have to use <code>Encoding.Unicode.GetBytes</code>, <code>fixed</code> statements or <code>Span&lt;T&gt;</code> to aquire address of basic types.</p>
+<p>How can it be done?
+Until .NET Core 2.0, <code>GCHandle.AddrOfPinnedObject()</code> is implemented in native-side:</p>
+<pre><code class="language-c++">// Get the address of a pinned object referenced by the supplied pinned
+// handle.  This routine assumes the handle is pinned and does not check.
+FCIMPL1(LPVOID, MarshalNative::GCHandleInternalAddrOfPinnedObject, OBJECTHANDLE handle)
+{
+    FCALL_CONTRACT;
 
-      </div>
-    </div>
-  </main>
-</article>
+    LPVOID p;
+    OBJECTREF objRef = ObjectFromHandle(handle);
 
-
-<script>
-  'use strict';
-
-  // side view
-  const menu = document.getElementById("menu");
-  const side = document.querySelector("nav.side");
-  menu.addEventListener("click", _ => {
-    if (side.classList.contains("vis")) {
-      menu.textContent = "menu";
-      side.classList.remove("vis");
-    } else {
-      menu.textContent = "menu_open";
-      side.classList.add("vis");
+    if (objRef == NULL)
+    {
+        p = NULL;
     }
-  });
+    else
+    {
+        // Get the interior pointer for the supported pinned types.
+        if (objRef-&gt;GetMethodTable() == g_pStringClass)
+            p = ((*(StringObject **)&amp;objRef))-&gt;GetBuffer();
+        else if (objRef-&gt;GetMethodTable()-&gt;IsArray())
+            p = (*((ArrayBase**)&amp;objRef))-&gt;GetDataPtr();
+        else
+            p = objRef-&gt;GetData();
+    }
 
-  // tree view
-  let elements = document.getElementsByClassName("caret");
-  for (let i = 0; i < elements.length; ++i) {
-    let element = elements[i];
-    element.addEventListener("click", () => {
-      element.parentElement.querySelector(".nested").classList.toggle("active");
-      element.classList.toggle("caret-down");
-    })
-  }
-</script>
+    return p;
+}
+FCIMPLEND
+</code></pre>
+<p>If object is string or array type,
+It returns its buffer's address by calling <code>GetBuffer()</code> and <code>GetDataPtr()</code>.</p>
+<p>In contrast, After .NET Core 3.0, <code>GCHandle.AddrOfPinnedObject()</code> is implemented in managed-side:</p>
+<pre><code class="language-csharp">/// &lt;summary&gt;
+/// Retrieve the address of an object in a Pinned handle.  This throws
+/// an exception if the handle is any type other than Pinned.
+/// &lt;/summary&gt;
+public IntPtr AddrOfPinnedObject()
+{
+    // Check if the handle was not a pinned handle.
+    // You can only get the address of pinned handles.
+    IntPtr handle = _handle;
+    ThrowIfInvalid(handle);
 
-</body>
+    if (!IsPinned(handle))
+    {
+        ThrowHelper.ThrowInvalidOperationException_HandleIsNotPinned();
+    }
 
-</html>m/Hacking/08_financial_security.html">08: 금융 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/09_development_model.html">09: 개발 모델, 개발 방법론</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/10_cryptology.html">10: 기초 암호학</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/11_hardware_security.html">11: 하드웨어 보안</a>
-    </li>
-    <li>
-      <a href="https://blog.sharp0802.com/Hacking/12_pentesting.html">12: 모의해킹</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
-</li>
+    // Get the address.
 
-      </ul>
-    </div>
+    object target = InternalGet(GetHandleValue(handle));
+    if (target is null)
+    {
+        return default;
+    }
 
-    <div id="footer">
-      <span>
-        Made with <a href="https://github.com/Sharp0802/sika">SIKA</a>
-      </span>
-    </div>
-  </div>
-</nav>
+    unsafe
+    {
+        if (RuntimeHelpers.ObjectHasComponentSize(target))
+        {
+            if (target.GetType() == typeof(string))
+            {
+                return (IntPtr)Unsafe.AsPointer(ref Unsafe.As&lt;string&gt;(target).GetRawStringData());
+            }
 
-<article>
-  <main>
-    <header class="card">
-      <h1>404!</h1>
-      <h3>Last edit on 2023-05-01</h3>
-    </header>
-    <div class="content">
-      <div class="markdown-body">
-        <h1 id="section">어... 여기엔 아무것도 없는 것 같은데요?</h1>
-<p>주소가 잘못되지는 않았는지 확인해주세요.</p>
+            Debug.Assert(target is Array);
+            return (IntPtr)Unsafe.AsPointer(ref Unsafe.As&lt;Array&gt;(target).GetRawArrayData());
+        }
+
+        return (IntPtr)Unsafe.AsPointer(ref target.GetRawData());
+    }
+}
+</code></pre>
+<p>As described, raw address of string's buffer or array are returned by <code>String.GetRawStringData()</code> and <code>Array.GetRawArrayData</code>.</p>
 
       </div>
     </div>
