@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="keywords" content="C#,.Net,GCHandle,AddrOfPinnedObject,GCHandle.AddrOfPinnedObject,string,System.String,array"/>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+  <script src="https://blog.sharp0802.com/script/highlight.min.js" defer></script>
+
+  <link rel="stylesheet" href="https://blog.sharp0802.com/style/github-markdown-light.css"/>
+  <link rel="stylesheet" href="https://blog.sharp0802.com/style/hl-github.min.css"/>
+  <link rel="stylesheet" href="https://blog.sharp0802.com/style/material.css"/>
+
+  <title>&#x27;GCHandle.AddrOfPinnedObject()&#x27; for strings and arrays</title>
+</head>
+
+<body>
+<nav class="top">
+  <div>
+    <div style="height: 24px;">
+      <span id="menu" class="material-symbols-outlined">menu</span>
+    </div>
+    <div>Sharp0802</div>
+    <div>
+      <img class="profile" src="https://avatars.githubusercontent.com/u/64760536?v=4" alt="profile image"/>
+    </div>
+  </div>
+</nav>
+
+<nav class="side">
+  <div class="side-container">
+    <div class="card" id="profile-container">
+      <img class="profile" src="https://github.com/Sharp0802.png" alt="profile image"/>
+      <ul id="contacts">
+        <li>
+          <h2>Sharp0802</h2>
+        </li>
+        <li></li>
+        <li style="height: fit-content;">Game &#xB7; System developer / C &#xB7; C&#x2B;&#x2B; &#xB7; C# / LLVM &#xB7; OpenGL / A high-school student &#x1F1F0;&#x1F1F7;</li>
+        <li></li>
+        <li>
+          <ul class="contact-entry">
+            <li>
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </span>
+            </li>
+            <li>
+              <a href="https://github.com/Sharp0802">
+                github.com/Sharp0802
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul class="contact-entry">
+            <li>
+              <span class="icon material-symbols-outlined">mail</span>
+            </li>
+            <li>
+              <a href="mailto:syw0802@proton.me">syw0802@proton.me</a>
+            </li>
+          </ul>
+        </li>
+          <li>
+            <ul class="contact-entry">
+              <li>
+                <span class="icon material-symbols-outlined">link</span>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/%EC%98%81%EC%9B%90-%EC%84%9C-aa289627a/">in/&#xC601;&#xC6D0;-&#xC11C;-aa289627a</a>
+              </li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+
+    <div class="card" id="tree-view-container">
+      <ul id="tree-view">
+        <li>
+  <span class="caret">.NET Core</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/.NET+Core/2024-09-24-gchandle-for-strings-arrays.html">'GCHandle.AddrOfPinnedObject()' for strings and arrays</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">.NET Framework</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/.NET+Framework/2022-02-06-accessviolationexception.html">Handling AccessViolationException</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <span class="caret">C_C++</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2022-02-06-svml-in-clang-cl.html">Clang-cl에서 SVML 사용하기</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2023-02-23-about-nostdlib-nostartfiles.html">--nostdlib과 --nostartfiles에 대하여</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2023-10-23-little-endian.html">Little-Endian과 포인터</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2023-10-23-pointer.html">포인터, 더 엄밀한 포인터</a>
+    </li>
+    <li>
+      <a href="https://blog.sharp0802.com/C_C%2b%2b/2023-10-24-array.html">배열, 더 엄밀한 배열</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://blog.sharp0802.com/index.html">Welcome!</a>
+</li>
+<li>
+  <span class="caret">Unity</span>
+  <ul class="nested">
+    <li>
+      <a href="https://blog.sharp0802.com/Unity/2022-03-01-ellipse-in-tilemap.html">Unity Tilemap에서 C#을 이용해 타원그리기</a>
+    </li>
+  </ul>
+</li>
+
+      </ul>
+    </div>
+
+    <div id="footer">
+      <span>
+        Made with <a href="https://github.com/Sharp0802/sika">SIKA</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <main>
+    <header class="card">
+      <h1>&#x27;GCHandle.AddrOfPinnedObject()&#x27; for strings and arrays</h1>
+      <h3>Last edit on 2024-09-24</h3>
+    </header>
+    <div class="content">
+      <div class="markdown-body">
+        <p>For <code>System.String</code> and <code>System.Array</code>, <code>GCHandle.AddrOfPinnedObject()</code> returns address of its buffer.
+So, You don't have to use <code>Encoding.Unicode.GetBytes</code>, <code>fixed</code> statements or <code>Span&lt;T&gt;</code> to aquire address of basic types.</p>
+<p>How can it be done?
+Until .NET Core 2.0, <code>GCHandle.AddrOfPinnedObject()</code> is implemented in native-side:</p>
+<pre><code class="language-c++">// Get the address of a pinned object referenced by the supplied pinned
+// handle.  This routine assumes the handle is pinned and does not check.
+FCIMPL1(LPVOID, MarshalNative::GCHandleInternalAddrOfPinnedObject, OBJECTHANDLE handle)
+{
+    FCALL_CONTRACT;
+
+    LPVOID p;
+    OBJECTREF objRef = ObjectFromHandle(handle);
+
+    if (objRef == NULL)
+    {
+        p = NULL;
+    }
+    else
+    {
+        // Get the interior pointer for the supported pinned types.
+        if (objRef-&gt;GetMethodTable() == g_pStringClass)
+            p = ((*(StringObject **)&amp;objRef))-&gt;GetBuffer();
+        else if (objRef-&gt;GetMethodTable()-&gt;IsArray())
+            p = (*((ArrayBase**)&amp;objRef))-&gt;GetDataPtr();
+        else
+            p = objRef-&gt;GetData();
+    }
+
+    return p;
+}
+FCIMPLEND
+</code></pre>
+<p>If object is string or array type,
+It returns its buffer's address by calling <code>GetBuffer()</code> and <code>GetDataPtr()</code>.</p>
+<p>In contrast, After .NET Core 3.0, <code>GCHandle.AddrOfPinnedObject()</code> is implemented in managed-side:</p>
+<pre><code class="language-csharp">/// &lt;summary&gt;
+/// Retrieve the address of an object in a Pinned handle.  This throws
+/// an exception if the handle is any type other than Pinned.
+/// &lt;/summary&gt;
+public IntPtr AddrOfPinnedObject()
+{
+    // Check if the handle was not a pinned handle.
+    // You can only get the address of pinned handles.
+    IntPtr handle = _handle;
+    ThrowIfInvalid(handle);
+
+    if (!IsPinned(handle))
+    {
+        ThrowHelper.ThrowInvalidOperationException_HandleIsNotPinned();
+    }
+
+    // Get the address.
+
+    object target = InternalGet(GetHandleValue(handle));
+    if (target is null)
+    {
+        return default;
+    }
+
+    unsafe
+    {
+        if (RuntimeHelpers.ObjectHasComponentSize(target))
+        {
+            if (target.GetType() == typeof(string))
+            {
+                return (IntPtr)Unsafe.AsPointer(ref Unsafe.As&lt;string&gt;(target).GetRawStringData());
+            }
+
+            Debug.Assert(target is Array);
+            return (IntPtr)Unsafe.AsPointer(ref Unsafe.As&lt;Array&gt;(target).GetRawArrayData());
+        }
+
+        return (IntPtr)Unsafe.AsPointer(ref target.GetRawData());
+    }
+}
+</code></pre>
+<p>As described, raw address of string's buffer or array are returned by <code>String.GetRawStringData()</code> and <code>Array.GetRawArrayData</code>.</p>
+
+      </div>
+    </div>
+  </main>
+</article>
+
+
+<script>
+  'use strict';
+
+  // side view
+  const menu = document.getElementById("menu");
+  const side = document.querySelector("nav.side");
+  menu.addEventListener("click", _ => {
+    if (side.classList.contains("vis")) {
+      menu.textContent = "menu";
+      side.classList.remove("vis");
+    } else {
+      menu.textContent = "menu_open";
+      side.classList.add("vis");
+    }
+  });
+
+  // tree view
+  let elements = document.getElementsByClassName("caret");
+  for (let i = 0; i < elements.length; ++i) {
+    let element = elements[i];
+    element.addEventListener("click", () => {
+      element.parentElement.querySelector(".nested").classList.toggle("active");
+      element.classList.toggle("caret-down");
+    })
+  }
+</script>
+
+</body>
+
+</html>
