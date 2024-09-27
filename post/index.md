@@ -8,16 +8,15 @@ Timestamps:
 Topic: []
 ---
 
-<h3 align="center">📚 Tech Stack / Environment</h3>
+### 📚 Tech Stack / Environment
 
-<div align="center">
+<div>
 <table>
   <tr>
-    <td>Framework/Tools</td>
+    <td>:building_construction: Framework</td>
     <td>
       <img src="https://img.shields.io/badge/LLVM-262D3A.svg?style=for-the-badge&logo=LLVM&logoColor=white" />
       <img src="https://img.shields.io/badge/OpenGL-5586A4.svg?style=for-the-badge&logo=OpenGL&logoColor=white" />
-      <img src="https://img.shields.io/badge/Docker-2496ED.svg?style=for-the-badge&logo=Docker&logoColor=white" />
       <img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white" />
       <img src="https://img.shields.io/badge/blazor-%235C2D91.svg?style=for-the-badge&logo=blazor&logoColor=white" />
       <img src="https://img.shields.io/badge/unity-%23000000.svg?style=for-the-badge&logo=unity&logoColor=white" />
@@ -27,7 +26,7 @@ Topic: []
   </tr>
 
   <tr>
-    <td>Languages</td>
+    <td>:memo: PLs</td>
     <td>
       <img src="https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white" />
       <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white" />
@@ -39,7 +38,7 @@ Topic: []
   </tr>
 
   <tr>
-    <td>Environments</td>
+    <td>:technologist: Environments</td>
     <td>
       <img src="https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge" />
       <img src="https://img.shields.io/badge/CLion-black?style=for-the-badge&logo=clion&logoColor=white" />
@@ -51,11 +50,20 @@ Topic: []
   </tr>
   
   <tr>
-    <td>Networks</td>
+    <td>:zap: Networks</td>
     <td>
       <img src="https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white" />
       <img src="https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white" />
       <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" />
+    </td>
+  </tr>
+
+  <tr>
+    <td>:speech_balloon: Languages</td>
+    <td>
+      <img src="https://img.shields.io/badge/A-english-blue?style=for-the-badge" />
+      <img src="https://img.shields.io/badge/あ-japanese-blue?style=for-the-badge" />
+      <img src="https://img.shields.io/badge/%ED%95%9C-korean-blue?style=for-the-badge" />
     </td>
   </tr>
 </table>
@@ -78,16 +86,23 @@ Topic: []
 | 2023 | BoB, Next-generation security leader training program (차세대보안리더양성프로그램) | KITRI (Korea Information Technology Research Institute, 한국정보기술연구원)  | https://www.kitribob.kr/                                      |
 | 2024 | Young Gifted Scientists Education Programme (청소년과학영재사사)                 | KAST (The Korean Academy of Science and Technology, 한국과학기술한림원)       | https://kast.or.kr/kr/person/teenager.php                     |
 
+### 📫 Contact
+
+- Email: syw0802@proton.me
+- Arcademic Email: syw0802.dev@dimigo.hs.kr
+- Blog: [blog.sharp0802.com](https://blog.sharp0802.com)
+
 ### 🔭 Github Stats
 
 <p align="center">
   <img src="https://github-profile-trophy.vercel.app/?username=Sharp0802&theme=gitdimmed&column=5" />
 </p>
 
+<div align="center">
 <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img align="left" src="https://github-readme-stats.vercel.app/api?username=Sharp0802&show_icons=true&theme=github_dark&hide_border=true&include_all_commits=true" />
+  <img src="https://github-readme-stats.vercel.app/api?username=Sharp0802&show_icons=true&theme=github_dark&hide_border=true&include_all_commits=true" />
 </a>
 <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sharp0802&langs_count=8&layout=compact&theme=github_dark&hide_border=true" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sharp0802&langs_count=8&layout=compact&theme=github_dark&hide_border=true" />
 </a>
-
+</div>
