@@ -5,6 +5,7 @@ Title: Welcome!
 Timestamps:
 - 2023-05-01
 - 2024-09-26
+- 2024-11-15
 Topic: []
 ---
 
@@ -13,7 +14,7 @@ Topic: []
 <div>
 <table>
   <tr>
-    <td>:building_construction: Framework</td>
+    <td>🚧 Framework</td>
     <td>
       <img src="https://img.shields.io/badge/LLVM-262D3A.svg?style=for-the-badge&logo=LLVM&logoColor=white" />
       <img src="https://img.shields.io/badge/OpenGL-5586A4.svg?style=for-the-badge&logo=OpenGL&logoColor=white" />
@@ -26,11 +27,12 @@ Topic: []
   </tr>
 
   <tr>
-    <td>:memo: PLs</td>
+    <td>📝 PLs</td>
     <td>
       <img src="https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white" />
       <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white" />
-      <img src="https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white" />
+      <img src="https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=sharp&logoColor=white" />
+      <img src="https://img.shields.io/badge/rust-%23CE412B.svg?style=for-the-badge&logo=rust" />
       <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" />
       <img src="https://img.shields.io/badge/latex-%23008080.svg?style=for-the-badge&logo=latex&logoColor=white" />
       <img src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" />
@@ -38,7 +40,7 @@ Topic: []
   </tr>
 
   <tr>
-    <td>:technologist: Environments</td>
+    <td>🧑‍💻 Environments</td>
     <td>
       <img src="https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge" />
       <img src="https://img.shields.io/badge/CLion-black?style=for-the-badge&logo=clion&logoColor=white" />
@@ -50,7 +52,7 @@ Topic: []
   </tr>
   
   <tr>
-    <td>:zap: Networks</td>
+    <td>⚡️ Networks</td>
     <td>
       <img src="https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white" />
       <img src="https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white" />
@@ -59,7 +61,7 @@ Topic: []
   </tr>
 
   <tr>
-    <td>:speech_balloon: Languages</td>
+    <td>💬 Languages</td>
     <td>
       <img src="https://img.shields.io/badge/A-english-blue?style=for-the-badge" />
       <img src="https://img.shields.io/badge/あ-japanese-blue?style=for-the-badge" />
@@ -73,18 +75,20 @@ Topic: []
 
 | Year | Name                                                                                  | Rank                          |
 |:----:|:--------------------------------------------------------------------------------------|:------------------------------|
-| 2022 | Korean Olympiad in Informatics (National) (한국정보올림피아드)                        | 🥉 Bronze Award (전국 동상)   |
-| 2023 | National Entrepreneurship Invention Contest (전국창업발명경진대회)                    | 🥇 Grand Prize (대상)         |
-| 2024 | Vocational High School Youth Startup Idea Contest (직업계고 청년 창업아이디어 공모전) | 🥈 Excellence Award (우수상)  |
-| 2024 | Generative AI Utilization Competition (생성형 AI 활용 대전)                           | 🥇 Top Prize (최우수상)       |
+| 2022.09 | Korean Olympiad in Informatics (National) (한국정보올림피아드)                        | 🥉 Bronze Award (전국 동상)   |
+| 2023.08 | National Entrepreneurship Invention Contest (전국창업발명경진대회)                    | 🥇 Grand Prize (대상)         |
+| 2024.06 | Vocational High School Youth Startup Idea Contest (직업계고 청년 창업아이디어 공모전) | 🥈 Excellence Award (우수상)  |
+| 2024.09 | Generative AI Utilization Competition (생성형 AI 활용 대전)                           | 🥇 Top Prize (최우수상)       |
+| 2024.10 | Gyeonggi Garage, Gyeonggi-Regional Digital Solutions Contest (경기창고, 경기도 디지털 솔루션 경연) | 🥇 Grand Prize (대상) |
+| 2024.11 | KOPO Venture Start-up Item Contest (벤처창업아이템 경진대회) | 🥇 Grand Prize (대상) |
 
 ### 🔖 Education
 
-| Year | Name                                                                          | Organizer                                                                  | Link                                                          |
-|:----:|:------------------------------------------------------------------------------|:---------------------------------------------------------------------------|:--------------------------------------------------------------|
-| 2023 | Korea Digital Media H.S. (한국디지털미디어고등학교)                               | --                                                                         | https://en.wikipedia.org/wiki/Korea_Digital_Media_High_School |
-| 2023 | BoB, Next-generation security leader training program (차세대보안리더양성프로그램) | KITRI (Korea Information Technology Research Institute, 한국정보기술연구원)  | https://www.kitribob.kr/                                      |
-| 2024 | Young Gifted Scientists Education Programme (청소년과학영재사사)                 | KAST (The Korean Academy of Science and Technology, 한국과학기술한림원)       | https://kast.or.kr/kr/person/teenager.php                     |
+|              Year | Name                                                                          | Organizer                                                                  | Link                                                          |
+|:-----------------:|:------------------------------------------------------------------------------|:---------------------------------------------------------------------------|:--------------------------------------------------------------|
+| 2023.03 ~ 2026.02 | Korea Digital Media H.S. (한국디지털미디어고등학교)                               | --                                                                         | https://en.wikipedia.org/wiki/Korea_Digital_Media_High_School |
+| 2023.07 ~ 2024.02 | BoB, Next-generation security leader training program (차세대보안리더양성프로그램) | KITRI (Korea Information Technology Research Institute, 한국정보기술연구원)  | https://www.kitribob.kr/                                      |
+| 2024.05 ~ 2024.10 | KAST Science Mentorship Program 2024 (청소년과학영재사사)                        | KAST (The Korean Academy of Science and Technology, 한국과학기술한림원)       | https://kast.or.kr/kr/person/teenager.php                     |
 
 ### 📫 Contact
 
